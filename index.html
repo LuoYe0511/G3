@@ -72,9 +72,10 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 }
 .opening-en{
   color:#ffffff;
-  font-size:22px;
+  font-family: sans-serif; /*普通无衬线英文*/
+  font-size:32px; /*放大，小于序章72px*/
   margin-top:18px;
-  letter-spacing:4px;
+  letter-spacing:-1px; /*紧凑，缩小字间距*/
 }
 .opening-note{
   color:#ffffff;
@@ -84,46 +85,55 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   letter-spacing:2px;
 }
 
-/* ========== 左侧竖GIF图片容器 ========== */
-.gif-left{
+/* ========== 顶部居中静态图片 ========== */
+.top-image{
   position:absolute;
-  left:0;
-  top:0;
-  height:100%;
-  width:auto;
-  z-index:1;
-}
-.gif-left img{
-  height:100%;
-  width:auto;
-  display:block;
-}
-
-/* 中间文字区域 */
-.page0-content{
-  position:relative;
+  top:46%;
+  left:50%;
+  transform:translate(-50%,-50%);
   z-index:2;
-  text-align:center;
+  max-width:90%;
+  max-height:40vh;
+  object-fit:contain;
 }
 
-/* 两行文案错开叠放 */
-.stagger-text{
+/* 中间文字区域，放到图片下方 */
+.page0-content{
+  position:absolute;
+  top:calc(46% + 40vh * 0.5);
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:3;
+  text-align:center;
+  width:100%;
+  padding:0 20px;
+}
+
+/* 主文案全部居中 */
+.main-text{
   position:relative;
   width:100%;
   max-width:640px;
   margin:0 auto 40px;
 }
-.stagger-text .line1{
+.main-text .line1{
   font-size:28px;
   letter-spacing:2px;
-  text-align:left;
+  text-align:center;
   opacity:0.92;
 }
-.stagger-text .line2{
+.main-text .line2{
   font-size:28px;
   letter-spacing:2px;
-  text-align:right;
-  margin-top:4px;
+  text-align:center;
+  margin-top:12px;
+  opacity:0.92;
+}
+.main-text .line3{
+  font-size:28px;
+  letter-spacing:2px;
+  text-align:center;
+  margin-top:12px;
   opacity:1;
 }
 
@@ -160,10 +170,21 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   .page{padding:20px;}
   .opening-dot{font-size:44px;}
   .opening-text{font-size:48px;}
-  .opening-en{font-size:18px;}
+  .opening-en{font-size:24px;letter-spacing:-0.5px;}
   .opening-note{font-size:14px;}
-  .stagger-text .line1{font-size:22px;}
-  .stagger-text .line2{font-size:22px;}
+
+  .top-image{
+    top:44%;
+    max-height:35vh;
+  }
+
+  .page0-content{
+    top:calc(44% + 35vh * 0.5);
+  }
+
+  .main-text .line1{font-size:22px;}
+  .main-text .line2{font-size:22px;}
+  .main-text .line3{font-size:22px;}
   .line-middle{font-size:19px;}
   .page-nav button{padding:6px 12px;font-size:14px;}
 }
@@ -172,7 +193,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 <body>
 <div class="wrap">
 
-<!-- 开场页：白色● + 红色序章 + Allothiri + 死无葬身之地 -->
+<!-- 开场页 -->
 <div class="opening-wrap">
   <div class="opening-title">
     <span class="opening-dot">●</span>
@@ -184,17 +205,18 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 
 <!-- 00 序章 -->
 <div class="page active" id="page0">
-  <div class="gif-left">
-    <img src="ezgif-115dd172c4a0c2a2.gif" alt="动画">
-  </div>
+  <!-- 静态图：顶部居中 -->
+  <img src="IMG_7221.PNG" alt="顶部图片" class="top-image">
 
+  <!-- 文字在图片下方 -->
   <div class="page0-content">
-    <div class="stagger-text">
+    <div class="main-text">
       <p class="line1">人类无法飞翔是因为心太重吗</p>
       <p class="line2">回忆 情感 羁绊</p>
+      <p class="line3">铸成枷锁</p>
     </div>
 
-    <p class="line-middle">铸成枷锁</p>
+    <p class="line-middle">飞翔.或许也是一种痛苦?</p>
 
     <div class="page-nav">
       <button onclick="goPage(0)">序章</button>
@@ -212,7 +234,6 @@ function goPage(index){
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
   navBtns.forEach(b => b.classList.remove('active'));
-  navBtns[index].classList.add('active');
 }
 </script>
 </div>
