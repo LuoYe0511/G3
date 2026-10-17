@@ -5,12 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 <title>寂生 - Allothiri</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;color:#fff;font-family:"KaiTi","楷体",STKaiti,serif;
--webkit-tap-highlight-color:transparent;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  color:#fff;
+  font-family:"KaiTi","楷体",STKaiti,serif;
+  -webkit-tap-highlight-color:transparent;
 }
-html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 
-.wrap{width:100%;height:100%;position:relative;}
+html,body{
+  height:100%;
+  overflow:hidden;
+  background:#0b0b0b;
+}
+
+.wrap{
+  width:100%;
+  height:100%;
+  position:relative;
+}
 
 .page{
   width:100%;
@@ -24,17 +38,14 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   pointer-events:none;
   transition: opacity 0.7s ease;
   transform: translateZ(0);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:40px;
 }
+
 .page.active{
   opacity:1;
   pointer-events:auto;
 }
 
-/* ========== 开场页：白色● + 红色序章 + Allothiri + 注解 ========== */
+/* ========== 开场页 ========== */
 .opening-wrap{
   position:absolute;
   z-index:100;
@@ -48,6 +59,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   opacity:1;
   animation: fadeOut 2.8s ease-in forwards;
 }
+
 @keyframes fadeOut {
   0%{opacity:1;}
   70%{opacity:1;}
@@ -58,25 +70,28 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   display:flex;
   align-items:baseline;
   justify-content:center;
-  font-family:"KaiTi","楷体",STKaiti,serif;
 }
+
 .opening-dot{
   color:#ffffff;
   font-size:64px;
   margin-right:12px;
 }
+
 .opening-text{
   color:#ff2b2b;
   font-size:72px;
   letter-spacing:12px;
 }
+
 .opening-en{
   color:#ffffff;
-  font-family: sans-serif; /*普通无衬线英文*/
-  font-size:32px; /*放大，小于序章72px*/
+  font-family: sans-serif;
+  font-size:32px;
   margin-top:18px;
-  letter-spacing:-1px; /*紧凑，缩小字间距*/
+  letter-spacing:-1px;
 }
+
 .opening-note{
   color:#ffffff;
   font-size:16px;
@@ -85,74 +100,97 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   letter-spacing:2px;
 }
 
-/* ========== 顶部图片：宽度铺满，占屏幕上半区 ========== */
-.top-image{
+/* ========== 背景图：铺满上半屏 ========== */
+.bg-img{
   position:absolute;
-  top:38%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  z-index:2;
+  top:0;
+  left:0;
   width:100%;
-  max-width:100%;
-  max-height:50vh;
+  height:55vh;
   object-fit:cover;
   object-position:center top;
+  z-index:1;
 }
 
-/* 中间文字区域，随图片上移 */
-.page0-content{
+/* ========== 图片内文字容器 ========== */
+.img-text-wrap{
   position:absolute;
-  top:calc(38% + 50vh * 0.5);
-  left:50%;
-  transform:translate(-50%,-50%);
-  z-index:3;
-  text-align:center;
+  top:0;
+  left:0;
   width:100%;
-  padding:0 20px;
+  height:55vh;
+  z-index:2;
+  padding:0 24px;
+  display:flex;
+  flex-direction:column;
 }
 
-/* 主文案全部居中【字号调小】 */
-.main-text{
-  position:relative;
+.line-top{
+  text-align:center;
+  font-size:23px;
+  padding-top:46px;
+  text-shadow: 0 2px 10px #000;
+  opacity:0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.left-text,
+.right-text,
+.center-text{
+  font-size:21px;
+  text-shadow: 0 2px 10px #000;
+  opacity:0;
+}
+
+.left-text{
+  align-self:flex-start;
+  margin-left:6%;
+}
+
+.right-text{
+  align-self:flex-end;
+  margin-right:6%;
+}
+
+.center-text{
+  align-self:center;
+}
+
+.row{
+  flex:1;
+  display:flex;
+  align-items:center;
+}
+
+.row1 .left-text{ animation: fadeInUp 1s ease forwards; animation-delay:1.4s; }
+.row2 .right-text{ animation: fadeInUp 1s ease forwards; animation-delay:2.4s; }
+.row3 .left-text{ animation: fadeInUp 1s ease forwards; animation-delay:3.4s; }
+.row4 .center-text{ animation: fadeInUp 1s ease forwards; animation-delay:4.4s; }
+
+/* ========== 图片下方黑色背景文字（固定显示，无动画） ========== */
+.bottom-text{
+  position:absolute;
+  top:55vh;
   width:100%;
-  max-width:640px;
-  margin:0 auto 40px;
-}
-.main-text .line1{
-  font-size:24px;
-  letter-spacing:2px;
   text-align:center;
-  opacity:0.92;
-}
-.main-text .line2{
-  font-size:24px;
-  letter-spacing:2px;
-  text-align:center;
-  margin-top:12px;
-  opacity:0.92;
-}
-.main-text .line3{
-  font-size:24px;
-  letter-spacing:2px;
-  text-align:center;
-  margin-top:12px;
-  opacity:1;
+  padding-top:34px;
+  z-index:2;
+  font-size:21px;
+  opacity:0.9;
 }
 
-/* 下方文案：飞翔.或许也是一种痛苦？【字号调小】 */
-.line-middle{
-  font-size:20px;
-  margin-bottom:40px;
-  letter-spacing:2px;
-  text-align:center;
-}
-
-/* 导航按钮：方框包裹，字体加深 */
+/* ========== 底部导航按钮 ========== */
 .page-nav{
+  position:absolute;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
   display:flex;
   gap:12px;
-  justify-content:center;
+  z-index:3;
 }
+
 .page-nav button{
   background:transparent;
   border:1px solid #fff;
@@ -163,64 +201,109 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   color:#fff;
   font-weight:bold;
 }
+
 .page-nav button.active{
   background:rgba(255,255,255,0.2);
 }
 
+/* ========== 渐入动画 ========== */
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
 /* ========== 手机端适配 ========== */
 @media (max-width:768px){
-  .page{padding:20px;}
   .opening-dot{font-size:44px;}
   .opening-text{font-size:48px;}
   .opening-en{font-size:24px;letter-spacing:-0.5px;}
   .opening-note{font-size:14px;}
 
-  .top-image{
-    top:36%;
-    width:100%;
-    max-width:100%;
-    max-height:50vh;
+  .bg-img{
+    height:52vh;
   }
 
-  .page0-content{
-    top:calc(36% + 50vh * 0.5);
+  .img-text-wrap{
+    height:52vh;
   }
 
-  .main-text .line1{font-size:20px;}
-  .main-text .line2{font-size:20px;}
-  .main-text .line3{font-size:20px;}
-  .line-middle{font-size:17px;}
-  .page-nav button{padding:6px 12px;font-size:14px;}
+  .line-top{
+    font-size:20px;
+    padding-top:38px;
+  }
+
+  .left-text,
+  .right-text,
+  .center-text{
+    font-size:18px;
+  }
+
+  .bottom-text{
+    top:52vh;
+    padding-top:28px;
+    font-size:18px;
+  }
+
+  .page-nav{
+    bottom:18px;
+  }
+
+  .page-nav button{
+    padding:6px 12px;
+    font-size:14px;
+  }
 }
 </style>
 </head>
+
 <body>
 <div class="wrap">
 
-<!-- 开场页 -->
-<div class="opening-wrap">
-  <div class="opening-title">
-    <span class="opening-dot">●</span>
-    <span class="opening-text">序章</span>
+  <!-- 开场页 -->
+  <div class="opening-wrap">
+    <div class="opening-title">
+      <span class="opening-dot">●</span>
+      <span class="opening-text">序章</span>
+    </div>
+    <p class="opening-en">Allothiri</p>
+    <p class="opening-note">死无葬身之地</p>
   </div>
-  <p class="opening-en">Allothiri</p>
-  <p class="opening-note">死无葬身之地</p>
-</div>
 
-<!-- 00 序章 -->
-<div class="page active" id="page0">
-  <!-- 静态图：铺满宽度，占屏幕上半部分 -->
-  <img src="IMG_7221.PNG" alt="顶部图片" class="top-image">
+  <!-- 00 序章 -->
+  <div class="page active" id="page0">
 
-  <!-- 文字在图片下方 -->
-  <div class="page0-content">
-    <div class="main-text">
-      <p class="line1">人类无法飞翔是因为心太重吗</p>
-      <p class="line2">回忆 情感 羁绊</p>
-      <p class="line3">铸成枷锁</p>
+    <img src="IMG_7221.PNG" class="bg-img" alt="背景">
+
+    <div class="img-text-wrap">
+      <p class="line-top">人类无法飞翔是因为心太重吗</p>
+
+      <div class="row row1">
+        <p class="left-text">回忆</p>
+      </div>
+
+      <div class="row row2">
+        <p class="right-text">情感</p>
+      </div>
+
+      <div class="row row3">
+        <p class="left-text">羁绊</p>
+      </div>
+
+      <div class="row row4">
+        <p class="center-text">铸成枷锁</p>
+      </div>
     </div>
 
-    <p class="line-middle">飞翔.或许也是一种痛苦？</p>
+    <!-- 图片下方黑色区域，固定文字无动画 -->
+    <div class="bottom-text">
+      飞翔.或许也是一种痛苦？
+    </div>
 
     <div class="page-nav">
       <button onclick="goPage(0)">序章</button>
@@ -228,17 +311,21 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
       <button onclick="goPage(2)">须知</button>
       <button onclick="goPage(3)">情节</button>
     </div>
+
   </div>
+
 </div>
 
 <script>
 const pages = document.querySelectorAll('.page');
 const navBtns = document.querySelectorAll('.page-nav button');
+
 function goPage(index){
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
   navBtns.forEach(b => b.classList.remove('active'));
 }
 </script>
-</div>
+
 </body>
+</html>
