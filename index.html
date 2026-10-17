@@ -73,14 +73,25 @@ h1{
   </div>
 </div>
 
-<div class="nav">
-<a href="https://www.kdocs.cn/l/cuQmUaw7t3Z5" target="_blank">01 /板评reviews</a>
-<a href="https://www.kdocs.cn/l/ckHnONXIQ8Hb" target="_blank">02 /话术words</a>
-<a href="https://www.kdocs.cn/l/cr5eYT3g8vcD" target="_blank">03 /卡类cards</a>
+<!-- 选项卡按钮 -->
+<div style="margin-top:30px;text-align:center;">
+<button onclick="switchTab('home')" id="btn-home" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#444;color:#fff;">主页</button>
+<button onclick="switchTab('notice')" id="btn-notice" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#222;color:#fff;">须知</button>
+<button onclick="switchTab('review')" id="btn-review" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#222;color:#fff;">板评</button>
+<button onclick="switchTab('word')" id="btn-word" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#222;color:#fff;">话术</button>
+<button onclick="switchTab('card')" id="btn-card" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#222;color:#fff;">卡类</button>
 </div>
 
-<div class="rules">
-<div style="margin-top:30px;line-height:1.8;background:rgba(0,0,0,0.25);padding:20px;border-radius:12px;color:#fff;">
+<!-- 主页面板（默认打开，放三个金山文档链接） -->
+<div id="tab-home" style="display:block;margin-top:25px;text-align:center;">
+<a href="https://www.kdocs.cn/l/cuQmUaw7t3Z5" target="_blank" style="display:block;margin:12px;font-size:18px;color:#fff;">01 /板评reviews</a>
+<a href="https://www.kdocs.cn/l/ckHnONXIQ8Hb" target="_blank" style="display:block;margin:12px;font-size:18px;color:#fff;">02 /话术words</a>
+<a href="https://www.kdocs.cn/l/cr5eYT3g8vcD" target="_blank" style="display:block;margin:12px;font-size:18px;color:#fff;">03 /卡类cards</a>
+</div>
+
+<!-- 须知面板 -->
+<div id="tab-notice" style="display:none;margin-top:25px;">
+<div style="line-height:1.8;background:rgba(0,0,0,0.25);padding:20px;border-radius:12px;color:#fff;">
 <h3 style="margin-top:0;">*须知 Individual Notice</h3>
 <p>男陪婉拒le 点单默认姐姐们送单</p>
 <p>提前先说明喜/雷 未告知踩到暗雷概不负责</p>
@@ -94,8 +105,44 @@ h1{
 </div>
 </div>
 
+<!-- 板评面板 -->
+<div id="tab-review" style="display:none;margin-top:25px;text-align:center;">
+<a href="https://www.kdocs.cn/l/cuQmUaw7t3Z5" target="_blank" style="font-size:20px;color:#fff;">👉 打开板评文档</a>
+</div>
+
+<!-- 话术面板 -->
+<div id="tab-word" style="display:none;margin-top:25px;text-align:center;">
+<a href="https://www.kdocs.cn/l/ckHnONXIQ8Hb" target="_blank" style="font-size:20px;color:#fff;">👉 打开话术文档</a>
+</div>
+
+<!-- 卡类面板 -->
+<div id="tab-card" style="display:none;margin-top:25px;text-align:center;">
+<a href="https://www.kdocs.cn/l/cr5eYT3g8vcD" target="_blank" style="font-size:20px;color:#fff;">👉 打开卡类文档</a>
+</div>
+
+<!-- 切换用JS代码，放在这一段最底部 -->
+<script>
+function switchTab(tabId){
+  // 全部内容隐藏
+  document.getElementById("tab-home").style.display="none";
+  document.getElementById("tab-notice").style.display="none";
+  document.getElementById("tab-review").style.display="none";
+  document.getElementById("tab-word").style.display="none";
+  document.getElementById("tab-card").style.display="none";
+  // 全部按钮变深色
+  document.getElementById("btn-home").style.background="#222";
+  document.getElementById("btn-notice").style.background="#222";
+  document.getElementById("btn-review").style.background="#222";
+  document.getElementById("btn-word").style.background="#222";
+  document.getElementById("btn-card").style.background="#222";
+  // 显示选中板块，高亮按钮
+  document.getElementById("tab-"+tabId).style.display="block";
+  document.getElementById("btn-"+tabId).style.background="#444";
+}
+</script>
+
 <div class="end-text">
-多次擦身，也换不来重逢，求你，悲天悯人。
+天之苍苍,其正色邪?
 </div>
 </body>
 </html>
