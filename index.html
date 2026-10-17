@@ -6,13 +6,12 @@
 <title>寂生 - Allothiri</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;color:#f0f0f0;font-family:"PingFang SC",system-ui,serif;
--webkit-tap-highlight-color:transparent; /* 消除手机点击黑块高亮 */
+-webkit-tap-highlight-color:transparent;
 }
 html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 
 .wrap{width:100%;height:100%;position:relative;}
 
-/* 全屏页面，增加硬件加速，修复黑屏闪烁 */
 .page{
   width:100%;
   height:100vh;
@@ -26,7 +25,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   opacity:0;
   pointer-events:none;
   transition: opacity 0.7s ease;
-  transform: translateZ(0); /* GPU硬件加速，解决切页黑屏闪烁 */
+  transform: translateZ(0);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -34,10 +33,19 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 }
 .page.active{
   opacity:1;
-  pointer-events:auto; /* 激活页面，允许点击（链接生效） */
+  pointer-events:auto;
 }
 
-/* 右上角导航栏 */
+/* ========== 序章页GIF：靠左，垂直居中 ========== */
+#page0{
+  background-image:url("ezgif-115dd172c4a0c2a2.gif");
+  background-size:auto 100%;
+  background-position:left center;
+  background-repeat:no-repeat;
+  box-shadow: inset 0 0 0 100vw rgba(0,0,0,0.55);
+}
+
+/* 右上角导航栏 【序章 人物 情节 须知】 */
 .top-nav{
   position:fixed;
   top:22px;
@@ -66,7 +74,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 /* 底部翻页控件 */
 .bottom-pager{
   position:fixed;
-  bottom:32px;
+  bottom:70px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
@@ -82,205 +90,36 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 }
 .page-text-num{font-size:14px;opacity:0.7;letter-spacing:1px;}
 
-/* 左下角固定签名 */
+/* ========== 签名：移到页面底部居中 ========== */
 .footer-signature{
   position:fixed;
-  bottom:24px;
-  left:30px;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
   font-size:12px;
   opacity:0.55;
   line-height:1.6;
 }
 
-/* ========== 序页样式 ========== */
+/* ========== 序章页面文案 ========== */
 .page0-content{text-align:center;}
-.page0-content .main-line{font-size:24px;margin-bottom:12px;opacity:0.9;}
-.page0-content .sub-line{font-size:24px;margin-bottom:24px;opacity:0.9;}
-.page0-content .small-text{font-size:18px;opacity:0.7;}
-.page0-content .prologue{margin-top:40px;font-size:13px;opacity:0.5;letter-spacing:2px;}
-
-/* ========== 相遇页样式 ========== */
-.page1-wrap{display:flex;align-items:center;gap:80px;}
-.page1-text{}
-.page1-text h1{font-size:140px;font-weight:normal;line-height:1;}
-.page1-text .eng{font-size:14px;opacity:0.6;margin-bottom:24px;letter-spacing:4px;}
-.page1-text .desc p{font-size:16px;margin-bottom:10px;opacity:0.8;}
-.tag-group{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap;max-width:450px;}
-.tag{border:1px solid rgba(255,255,255,0.25);border-radius:99px;padding:5px 12px;font-size:13px;opacity:0.75;}
-.page1-text .tip{margin-top:20px;font-size:13px;opacity:0.55;}
-.page1-img-group{position:relative;width:420px;height:520px;}
-.img-card{position:absolute;width:260px;height:340px;border-radius:4px;background-size:cover;background-position:center;}
-.img-card.a{top:0;left:0;transform:rotate(6deg);background-image:url("图片地址");}
-.img-card.b{bottom:20px;right:10px;transform:rotate(-4deg);background-image:url("图片地址");}
-
-/* ========== 须知页样式 ========== */
-.page2-wrap{display:flex;align-items:center;gap:70px;max-width:1100px;}
-.page2-left-img{width:320px;height:520px;background-image:url("图片地址");background-size:cover;background-position:center;opacity:0.7;}
-.page2-right{}
-.page2-right .title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
-.page2-right h2{font-size:22px;font-weight:normal;}
-.page2-right .notes-eng{font-size:13px;opacity:0.5;letter-spacing:1px;}
-.rule-list{display:flex;flex-direction:column;gap:18px;}
-.rule-item{display:flex;gap:14px;font-size:15px;opacity:0.8;line-height:1.6;}
-.rule-no{width:24px;opacity:0.5;font-size:13px;}
-
-/* ========== 连结页样式 ========== */
-.page3-content{text-align:center;}
-.page3-content h2{font-size:32px;margin-bottom:30px;opacity:0.9;}
-.link-box{display:flex;flex-direction:column;gap:20px;}
-.link-box a{font-size:18px;color:#ddd;opacity:0.8;text-decoration:none;position:relative;z-index:10;}
-.link-box a:hover{opacity:1;}
-
-/* ========== 移动端适配【核心新增】屏幕宽度小于768px自动调整 ========== */
-@media (max-width:768px){
-  .page{padding:20px;}
-  /* 相遇页左右排版 → 上下堆叠 */
-  .page1-wrap{flex-direction:column;gap:30px;text-align:center;}
-  .page1-text h1{font-size:72px;}
-  .tag-group{justify-content:center;max-width:100%;}
-  .page1-img-group{width:300px;height:360px;transform:scale(0.9);}
-  /* 须知页左右分栏 → 上下堆叠 */
-  .page2-wrap{flex-direction:column;gap:24px;max-width:100%;}
-  .page2-left-img{width:100%;height:240px;}
-  .rule-item{font-size:14px;}
-  /* 右上角导航缩小 */
-  .top-nav button{padding:5px 10px;font-size:12px;}
-  /* 左下角签名缩小 */
-  .footer-signature{left:12px;font-size:10px;}
-}
+.page0-content .main-line{font-size:28px;margin-bottom:12px;opacity:0.9;letter-spacing:2px;}
 </style>
 </head>
 <body>
 <div class="wrap">
-<!-- 右上角导航 -->
+<!-- 右上角导航：序章 人物 情节 须知 -->
 <div class="top-nav">
-<button onclick="goPage(0)" class="active">序</button>
-<button onclick="goPage(1)">相遇</button>
-<button onclick="goPage(2)">须知</button>
-<button onclick="goPage(3)">连结</button>
+<button onclick="goPage(0)">序章</button>
+<button onclick="goPage(1)">人物</button>
+<button onclick="goPage(2)">情节</button>
+<button onclick="goPage(3)">须知</button>
 </div>
 
-<!-- 00 序 -->
-<div class="page active" id="page0">
+<!-- 00 序章 -->
+<div class="page" id="page0">
 <div class="page0-content">
-<p class="main-line">人们靠分开的痛觉</p>
-<p class="sub-line">来辨别爱的深浅</p>
-<p class="small-text">你也是吗</p>
-<p class="prologue">prologue</p>
+<p class="main-line">缓缓飘落的枫叶像思念</p>
 </div>
 </div>
-
-<!-- 01 相遇 -->
-<div class="page" id="page1">
-<div class="page1-wrap">
-<div class="page1-text">
-<h1>寂生</h1>
-<p class="eng">Allothiri</p>
-<div class="desc">
-<p>没有什么可遗憾的</p>
-<p>擦身而过也是一种待我如初</p>
-</div>
-<div class="tag-group">
-<span class="tag">infp</span>
-<span class="tag">男</span>
-<span class="tag">17</span>
-<span class="tag">三无</span>
-<span class="tag">伪救赎</span>
-<span class="tag">剖析</span>
-<span class="tag">白话</span>
-<span class="tag">意识流</span>
-<span class="tag">温柔刀</span>
-</div>
-<p class="tip">常驻 · 上春山 / 游园地</p>
-</div>
-<div class="page1-img-group">
-<div class="img-card a"></div>
-<div class="img-card b"></div>
-</div>
-</div>
-</div>
-
-<!-- 02 须知 -->
-<div class="page" id="page2">
-<div class="page2-wrap">
-<div class="page2-left-img"></div>
-<div class="page2-right">
-<div class="title-row">
-<h2>须知</h2>
-<span class="notes-eng">NOTES</span>
-</div>
-<div class="rule-list">
-<div class="rule-item"><span class="rule-no">01</span><span>男陪婉拒le，点单默认姐姐们送单</span></div>
-<div class="rule-item"><span class="rule-no">02</span><span>提前先说明喜/雷，未告知踩到暗雷概不负责</span></div>
-<div class="rule-item"><span class="rule-no">03</span><span>婉拒黄/黑脸emoji</span></div>
-<div class="rule-item"><span class="rule-no">04</span><span>包括但玩烂梗以及摆烂话术，如发生大退并视为送单</span></div>
-<div class="rule-item"><span class="rule-no">05</span><span>30min/5min 60min/10min决定去留，婉拒卡点</span></div>
-<div class="rule-item"><span class="rule-no">06</span><span>婉拒过度提起“板陪关系”，出现则大退视为送单</span></div>
-<div class="rule-item"><span class="rule-no">07</span><span>单中出现不适请及时说出安全词“慢一点 寂生 ”</span></div>
-<div class="rule-item"><span class="rule-no">08</span><span>虐单风格中低恋，婉拒无恋，高恋慎点</span></div>
-<div class="rule-item"><span class="rule-no">09</span><span>接受我的邀约，请给一些时间等待我与你共鸣</span></div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- 03 连结 -->
-<div class="page" id="page3">
-<div class="page3-content">
-<h2>连结</h2>
-<div class="link-box">
-<a href="https://www.kdocs.cn/l/cuQmUaw7t3Z5" target="_blank">👉 板评</a>
-<a href="https://www.kdocs.cn/l/ckHnONXIQ8Hb" target="_blank">👉 话术</a>
-<a href="https://www.kdocs.cn/l/cr5eYT3g8vCD" target="_blank">👉 卡类</a>
-</div>
-</div>
-</div>
-
-<!-- 底部翻页 -->
-<div class="bottom-pager">
-<button class="arrow" onclick="prevPage()">&lt;</button>
-<span class="page-text-num"><span id="current">00</span> / 03</span>
-<button class="arrow" onclick="nextPage()">&gt;</button>
-</div>
-
-<!-- 左下角签名 -->
-<div class="footer-signature">
-— Allothiri ◆<br>
-v.2026.10 · for those who wait
-</div>
-</div>
-
-<script>
-let current = 0;
-const totalPage = 4;
-const pages = document.querySelectorAll('.page');
-const navBtns = document.querySelectorAll('.top-nav button');
-const currentNumDom = document.getElementById('current');
-
-function render(){
-  pages.forEach(p=>p.classList.remove('active'));
-  navBtns.forEach(b=>b.classList.remove('active'));
-  pages[current].classList.add('active');
-  navBtns[current].classList.add('active');
-  currentNumDom.innerText = String(current).padStart(2,'0');
-}
-function goPage(num){
-  current = num;
-  render();
-}
-function nextPage(){
-  current = (current + 1) % totalPage;
-  render();
-}
-function prevPage(){
-  current = (current -1 + totalPage) % totalPage;
-  render();
-}
-//鼠标滚轮翻页（仅电脑）
-document.addEventListener('wheel',e=>{
-  if(e.deltaY>0) nextPage();
-  else prevPage();
-},{passive:true});
-</script>
-</body>
-</html>
