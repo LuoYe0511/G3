@@ -100,7 +100,7 @@ html,body{
   letter-spacing:2px;
 }
 
-/* ========== 背景图：放大到70vh ========== */
+/* ========== 背景图：70vh ========== */
 .bg-img{
   position:absolute;
   top:0;
@@ -122,12 +122,10 @@ html,body{
   z-index:2;
 }
 
-/* 顶部标题：居中 */
+/* 顶部标题【修复居中，移除left+translate冲突】 */
 .line-top{
   position:absolute;
   top:8%;
-  left:50%;
-  transform:translateX(-50%);
   width:100%;
   text-align:center;
   font-size:23px;
@@ -173,13 +171,11 @@ html,body{
   animation-delay:3.4s;
 }
 
-/* 铸成枷锁：76%高度，居中 */
+/* 铸成枷锁【修复居中】 */
 .txt-lock{
   position:absolute;
   top:76%;
-  left:50%;
   width:100%;
-  transform:translateX(-50%);
   text-align:center;
   font-size:21px;
   text-shadow: 0 2px 10px #000;
@@ -202,8 +198,6 @@ html,body{
 .bottom-text{
   position:absolute;
   top:30px;
-  left:50%;
-  transform:translateX(-50%);
   width:100%;
   text-align:center;
   z-index:2;
@@ -215,13 +209,10 @@ html,body{
 .page-nav{
   position:absolute;
   bottom:24px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:12px;
+  width:100%;
+  text-align:center;
   z-index:3;
 }
-
 .page-nav button{
   background:transparent;
   border:1px solid #fff;
@@ -231,8 +222,8 @@ html,body{
   font-size:16px;
   color:#fff;
   font-weight:bold;
+  margin:0 6px;
 }
-
 .page-nav button.active{
   background:rgba(255,255,255,0.2);
 }
@@ -296,9 +287,6 @@ html,body{
     font-size:18px;
   }
 
-  .page-nav{
-    bottom:18px;
-  }
   .page-nav button{
     padding:6px 12px;
     font-size:14px;
