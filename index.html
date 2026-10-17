@@ -3,146 +3,259 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>寂生</title>
+<title>寂生 - Allothiri</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-    background:#121214;
-    color:#d8d8d8;
-    font-family:"Microsoft YaHei",serif;
-    line-height:1.8;
-    max-width:800px;
-    margin:0 auto;
-    padding:40px 24px;
+*{margin:0;padding:0;box-sizing:border-box;color:#f0f0f0;font-family:"PingFang SC",system-ui,serif;}
+html,body{height:100%;overflow:hidden;background:#0b0b0b;}
+
+.wrap{width:100%;height:100%;position:relative;}
+
+/* 全屏页面 + 淡入淡出动画 */
+.page{
+  width:100%;
+  height:100vh;
+  position:absolute;
+  top:0;
+  left:0;
+  background:#0b0b0b;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 0.7s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
 }
-h1{
-    color:#eee;
-    font-weight:normal;
-    margin-bottom:16px;
+.page.active{
+  opacity:1;
+  pointer-events:auto;
 }
-.quote{
-    color:#aaa;
-    margin-bottom:40px;
-    font-size:16px;
+
+/* 右上角导航栏 */
+.top-nav{
+  position:fixed;
+  top:22px;
+  right:24px;
+  z-index:99;
+  display:flex;
+  gap:6px;
+  background:rgba(255,255,255,0.08);
+  padding:5px;
+  border-radius:999px;
 }
-.nav{
-    margin:30px 0;
+.top-nav button{
+  background:transparent;
+  border:none;
+  padding:7px 16px;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:14px;
+  opacity:0.75;
 }
-.nav a{
-    color:#b8a8a8;
-    text-decoration:none;
-    margin-right:20px;
+.top-nav button.active{
+  background:rgba(255,255,255,0.18);
+  opacity:1;
 }
-.nav a:hover{
-    color:#fff;
+
+/* 底部翻页控件 */
+.bottom-pager{
+  position:fixed;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:20px;
+  z-index:99;
 }
-.rules{
-    margin:30px 0;
+.arrow{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.3);
+  background:transparent;color:#fff;
+  cursor:pointer;
 }
-.rules p{
-    margin:8px 0;
-    color:#c9c9c9;
+.page-text-num{font-size:14px;opacity:0.7;letter-spacing:1px;}
+
+/* 左下角固定签名 */
+.footer-signature{
+  position:fixed;
+  bottom:24px;
+  left:30px;
+  font-size:12px;
+  opacity:0.55;
+  line-height:1.6;
 }
-.end-text{
-    margin-top:50px;
-    color:#999;
-}
+
+/* ========== 序页样式 ========== */
+.page0-content{text-align:center;}
+.page0-content .main-line{font-size:24px;margin-bottom:12px;opacity:0.9;}
+.page0-content .sub-line{font-size:24px;margin-bottom:24px;opacity:0.9;}
+.page0-content .small-text{font-size:18px;opacity:0.7;}
+.page0-content .prologue{margin-top:40px;font-size:13px;opacity:0.5;letter-spacing:2px;}
+
+/* ========== 相遇页样式 ========== */
+.page1-wrap{display:flex;align-items:center;gap:80px;}
+.page1-text{}
+.page1-text h1{font-size:140px;font-weight:normal;line-height:1;}
+.page1-text .eng{font-size:14px;opacity:0.6;margin-bottom:24px;letter-spacing:4px;}
+.page1-text .desc p{font-size:16px;margin-bottom:10px;opacity:0.8;}
+.tag-group{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap;max-width:450px;}
+.tag{border:1px solid rgba(255,255,255,0.25);border-radius:99px;padding:5px 12px;font-size:13px;opacity:0.75;}
+.page1-text .tip{margin-top:20px;font-size:13px;opacity:0.55;}
+.page1-img-group{position:relative;width:420px;height:520px;}
+.img-card{position:absolute;width:260px;height:340px;border-radius:4px;background-size:cover;background-position:center;}
+.img-card.a{top:0;left:0;transform:rotate(6deg);background-image:url("图片地址");}
+.img-card.b{bottom:20px;right:10px;transform:rotate(-4deg);background-image:url("图片地址");}
+
+/* ========== 须知页样式 ========== */
+.page2-wrap{display:flex;align-items:center;gap:70px;max-width:1100px;}
+.page2-left-img{width:320px;height:520px;background-image:url("图片地址");background-size:cover;background-position:center;opacity:0.7;}
+.page2-right{}
+.page2-right .title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+.page2-right h2{font-size:22px;font-weight:normal;}
+.page2-right .notes-eng{font-size:13px;opacity:0.5;letter-spacing:1px;}
+.rule-list{display:flex;flex-direction:column;gap:18px;}
+.rule-item{display:flex;gap:14px;font-size:15px;opacity:0.8;line-height:1.6;}
+.rule-no{width:24px;opacity:0.5;font-size:13px;}
+
+/* ========== 连结页样式 ========== */
+.page3-content{text-align:center;}
+.page3-content h2{font-size:32px;margin-bottom:30px;opacity:0.9;}
+.link-box{display:flex;flex-direction:column;gap:20px;}
+.link-box a{font-size:18px;color:#ddd;opacity:0.8;text-decoration:none;}
+.link-box a:hover{opacity:1;}
 </style>
 </head>
 <body>
+<div class="wrap">
+<!-- 右上角导航 -->
+<div class="top-nav">
+<button onclick="goPage(0)" class="active">序</button>
+<button onclick="goPage(1)">相遇</button>
+<button onclick="goPage(2)">须知</button>
+<button onclick="goPage(3)">连结</button>
+</div>
+
+<!-- 00 序 -->
+<div class="page active" id="page0">
+<div class="page0-content">
+<p class="main-line">人们靠分开的痛觉</p>
+<p class="sub-line">来辨别爱的深浅</p>
+<p class="small-text">你也是吗</p>
+<p class="prologue">prologue</p>
+</div>
+</div>
+
+<!-- 01 相遇 -->
+<div class="page" id="page1">
+<div class="page1-wrap">
+<div class="page1-text">
 <h1>寂生</h1>
-<div style="
-  position:relative;
-  width:100%;
-  max-width:700px;
-  height:350px;
-  background-image:url('pexels-cottonbro-9667643.jpg');
-  background-size:cover;
-  background-position:center;
-  border-radius:12px;
-">
-  <div style="
-    position:absolute;
-    bottom:20px;
-    left:20px;
-    color:#fff;
-    font-size:18px;
-    text-shadow: 1px 1px 4px #000;
-  ">
-    人类无法飞行,是因为心太重吗?
-  </div>
+<p class="eng">Allothiri</p>
+<div class="desc">
+<p>没有什么可遗憾的</p>
+<p>擦身而过也是一种待我如初</p>
 </div>
-
-<!-- 选项卡按钮 -->
-<div style="margin-top:30px;text-align:center;">
-<button onclick="switchTab('home')" id="btn-home" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#444;color:#fff;">主页</button>
-<button onclick="switchTab('notice')" id="btn-notice" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#222;color:#fff;">须知</button>
-<button onclick="switchTab('review')" id="btn-review" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#222;color:#fff;">板评</button>
-<button onclick="switchTab('word')" id="btn-word" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#222;color:#fff;">话术</button>
-<button onclick="switchTab('card')" id="btn-card" style="padding:8px 16px;margin:4px;border-radius:8px;border:none;background:#222;color:#fff;">卡类</button>
+<div class="tag-group">
+<span class="tag">infp</span>
+<span class="tag">男</span>
+<span class="tag">22</span>
+<span class="tag">低无</span>
+<span class="tag">剖析</span>
+<span class="tag">温虐</span>
+<span class="tag">意识流</span>
+<span class="tag">温柔刀</span>
 </div>
-
-<!-- 主页面板（默认打开，放三个金山文档链接） -->
-<div id="tab-home" style="display:block;margin-top:25px;text-align:center;">
-<a href="https://www.kdocs.cn/l/cuQmUaw7t3Z5" target="_blank" style="display:block;margin:12px;font-size:18px;color:#fff;">01 /板评reviews</a>
-<a href="https://www.kdocs.cn/l/ckHnONXIQ8Hb" target="_blank" style="display:block;margin:12px;font-size:18px;color:#fff;">02 /话术words</a>
-<a href="https://www.kdocs.cn/l/cr5eYT3g8vcD" target="_blank" style="display:block;margin:12px;font-size:18px;color:#fff;">03 /卡类cards</a>
+<div class="page1-img-group">
+<div class="img-card a"></div>
+<div class="img-card b"></div>
 </div>
-
-<!-- 须知面板 -->
-<div id="tab-notice" style="display:none;margin-top:25px;">
-<div style="line-height:1.8;background:rgba(0,0,0,0.25);padding:20px;border-radius:12px;color:#fff;">
-<h3 style="margin-top:0;">*须知 Individual Notice</h3>
-<p>男陪婉拒le 点单默认姐姐们送单</p>
-<p>提前先说明喜/雷 未告知踩到暗雷概不负责</p>
-<p>婉拒黄/黑脸emoji</p>
-<p>包括但玩烂梗以及摆烂话术 如发生大退并视为送单</p>
-<p>30min/5min 60min/10min决定去留 婉拒卡点</p>
-<p>婉拒过度提起“板陪关系”出现则大退视为送单</p>
-<p>单中出现不适请及时说出安全词“慢一点 寂生 ”</p>
-<p>虐单风格中低恋 婉拒无恋 高恋慎点</p>
-<p>接受我的邀约 请给一些时间等待我与你共鸣</p>
 </div>
 </div>
 
-<!-- 板评面板 -->
-<div id="tab-review" style="display:none;margin-top:25px;text-align:center;">
-<a href="https://www.kdocs.cn/l/cuQmUaw7t3Z5" target="_blank" style="font-size:20px;color:#fff;">👉 打开板评文档</a>
+<!-- 02 须知 -->
+<div class="page" id="page2">
+<div class="page2-wrap">
+<div class="page2-left-img"></div>
+<div class="page2-right">
+<div class="title-row">
+<h2>须知</h2>
+<span class="notes-eng">NOTES</span>
+</div>
+<div class="rule-list">
+<div class="rule-item"><span class="rule-no">01</span><span>男陪婉拒le，点单默认姐姐们送单</span></div>
+<div class="rule-item"><span class="rule-no">02</span><span>提前先说明喜/雷，未告知踩到暗雷概不负责</span></div>
+<div class="rule-item"><span class="rule-no">03</span><span>婉拒黄/黑脸emoji</span></div>
+<div class="rule-item"><span class="rule-no">04</span><span>包括但玩烂梗以及摆烂话术，如发生大退并视为送单</span></div>
+<div class="rule-item"><span class="rule-no">05</span><span>30min/5min 60min/10min决定去留，婉拒卡点</span></div>
+<div class="rule-item"><span class="rule-no">06</span><span>婉拒过度提起“板陪关系”，出现则大退视为送单</span></div>
+<div class="rule-item"><span class="rule-no">07</span><span>单中出现不适请及时说出安全词“慢一点 寂生 ”</span></div>
+<div class="rule-item"><span class="rule-no">08</span><span>虐单风格中低恋，婉拒无恋，高恋慎点</span></div>
+<div class="rule-item"><span class="rule-no">09</span><span>接受我的邀约，请给一些时间等待我与你共鸣</span></div>
+</div>
+</div>
+</div>
 </div>
 
-<!-- 话术面板 -->
-<div id="tab-word" style="display:none;margin-top:25px;text-align:center;">
-<a href="https://www.kdocs.cn/l/ckHnONXIQ8Hb" target="_blank" style="font-size:20px;color:#fff;">👉 打开话术文档</a>
+<!-- 03 连结 -->
+<div class="page" id="page3">
+<div class="page3-content">
+<h2>连结</h2>
+<div class="link-box">
+<a href="https://www.kdocs.cn/l/cuQmUaw7t3Z5" target="_blank">👉 板评</a>
+<a href="https://www.kdocs.cn/l/ckHnONXIQ8Hb" target="_blank">👉 话术</a>
+<a href="https://www.kdocs.cn/l/cr5eYT3g8vCD" target="_blank">👉 卡类</a>
+</div>
+</div>
 </div>
 
-<!-- 卡类面板 -->
-<div id="tab-card" style="display:none;margin-top:25px;text-align:center;">
-<a href="https://www.kdocs.cn/l/cr5eYT3g8vcD" target="_blank" style="font-size:20px;color:#fff;">👉 打开卡类文档</a>
+<!-- 底部翻页 -->
+<div class="bottom-pager">
+<button class="arrow" onclick="prevPage()">&lt;</button>
+<span class="page-text-num"><span id="current">00</span> / 03</span>
+<button class="arrow" onclick="nextPage()">&gt;</button>
 </div>
 
-<!-- 切换用JS代码，放在这一段最底部 -->
+<!-- 左下角签名 -->
+<div class="footer-signature">
+— Allothiri ◆<br>
+v.2026.10 · for those who wait
+</div>
+</div>
+
 <script>
-function switchTab(tabId){
-  // 全部内容隐藏
-  document.getElementById("tab-home").style.display="none";
-  document.getElementById("tab-notice").style.display="none";
-  document.getElementById("tab-review").style.display="none";
-  document.getElementById("tab-word").style.display="none";
-  document.getElementById("tab-card").style.display="none";
-  // 全部按钮变深色
-  document.getElementById("btn-home").style.background="#222";
-  document.getElementById("btn-notice").style.background="#222";
-  document.getElementById("btn-review").style.background="#222";
-  document.getElementById("btn-word").style.background="#222";
-  document.getElementById("btn-card").style.background="#222";
-  // 显示选中板块，高亮按钮
-  document.getElementById("tab-"+tabId).style.display="block";
-  document.getElementById("btn-"+tabId).style.background="#444";
-}
-</script>
+let current = 0;
+const totalPage = 4;
+const pages = document.querySelectorAll('.page');
+const navBtns = document.querySelectorAll('.top-nav button');
+const currentNumDom = document.getElementById('current');
 
-<div class="end-text">
-天之苍苍,其正色邪?
-</div>
+function render(){
+  pages.forEach(p=>p.classList.remove('active'));
+  navBtns.forEach(b=>b.classList.remove('active'));
+  pages[current].classList.add('active');
+  navBtns[current].classList.add('active');
+  currentNumDom.innerText = String(current).padStart(2,'0');
+}
+function goPage(num){
+  current = num;
+  render();
+}
+function nextPage(){
+  current = (current + 1) % totalPage;
+  render();
+}
+function prevPage(){
+  current = (current -1 + totalPage) % totalPage;
+  render();
+}
+//鼠标滚轮翻页
+document.addEventListener('wheel',e=>{
+  if(e.deltaY>0) nextPage();
+  else prevPage();
+},{passive:true});
+</script>
 </body>
 </html>
