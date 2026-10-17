@@ -258,27 +258,37 @@ html,body{
   opacity:0.9;
 }
 
-/* ========== 底部导航按钮 ========== */
+/* ========== 底部导航栏【横向长椭圆形白色外框】 ========== */
 .page-nav{
   position:absolute;
   bottom:24px;
-  width:100%;
-  text-align:center;
+  left:50%;
+  transform:translateX(-50%);
   z-index:3;
+
+  border:1px solid #ffffff;
+  border-radius:9999px; /* 超大圆角 = 长椭圆 */
+  padding:12px 24px;
+  display:flex;
+  gap:16px;
+  align-items:center;
+  background:transparent;
 }
+
 .page-nav button{
   background:transparent;
-  border:1px solid #fff;
-  padding:8px 18px;
-  border-radius:4px;
+  border:none;
+  padding:6px 14px;
+  border-radius:999px;
   cursor:pointer;
   font-size:16px;
   color:#fff;
   font-weight:bold;
-  margin:0 6px;
+  white-space:nowrap;
 }
+
 .page-nav button.active{
-  background:rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.22);
 }
 
 /* ========== 文字上浮动画 ========== */
@@ -340,8 +350,13 @@ html,body{
     font-size:18px;
   }
 
+  .page-nav{
+    bottom:18px;
+    padding:10px 18px;
+    gap:10px;
+  }
   .page-nav button{
-    padding:6px 12px;
+    padding:5px 10px;
     font-size:14px;
   }
 }
@@ -374,7 +389,8 @@ html,body{
       <p class="opening-note">死无葬身之地</p>
     </div>
 
-    <img src="IMG_7221.JPG" class="bg-img" alt="背景">
+    <!-- 这里是序章背景图，请确认文件名和实际图片一致！ -->
+    <img src="IMG_7221.JPG" class="bg-img" alt="背景图">
 
     <div class="img-text-wrap">
       <p class="line-top">人类无法飞翔是因为心太重吗</p>
