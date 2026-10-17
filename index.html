@@ -100,29 +100,29 @@ html,body{
   letter-spacing:2px;
 }
 
-/* ========== 背景图 ========== */
+/* ========== 背景图：放大到70vh ========== */
 .bg-img{
   position:absolute;
   top:0;
   left:0;
   width:100%;
-  height:55vh;
+  height:70vh;
   object-fit:cover;
   object-position:center top;
   z-index:1;
 }
 
-/* ========== 图片内文字容器（0~55vh，图片区域） ========== */
+/* ========== 图片内文字容器 ========== */
 .img-text-wrap{
   position:absolute;
   top:0;
   left:0;
   width:100%;
-  height:55vh;
+  height:70vh;
   z-index:2;
 }
 
-/* 顶部标题：人类无法飞翔是因为心太重吗【修正】 */
+/* 顶部标题：居中 */
 .line-top{
   position:absolute;
   top:8%;
@@ -137,7 +137,7 @@ html,body{
   animation-delay: 0.4s;
 }
 
-/* 回忆：图片高度22%，左留6% */
+/* 回忆：22%高度，左6% */
 .txt-memory{
   position:absolute;
   top:22%;
@@ -149,7 +149,7 @@ html,body{
   animation-delay:1.4s;
 }
 
-/* 情感：图片高度40%，右留6% */
+/* 情感：40%高度，右6% */
 .txt-emotion{
   position:absolute;
   top:40%;
@@ -161,7 +161,7 @@ html,body{
   animation-delay:2.4s;
 }
 
-/* 羁绊：图片高度58%，左留6% */
+/* 羁绊：58%高度，左6% */
 .txt-bond{
   position:absolute;
   top:58%;
@@ -173,7 +173,7 @@ html,body{
   animation-delay:3.4s;
 }
 
-/* 铸成枷锁：图片高度76%，居中【修正增加width:100%】 */
+/* 铸成枷锁：76%高度，居中 */
 .txt-lock{
   position:absolute;
   top:76%;
@@ -188,13 +188,24 @@ html,body{
   animation-delay:4.4s;
 }
 
-/* ========== 图片下方黑色背景文字（固定显示，无动画） ========== */
+/* ========== 下方黑色区域：30% ========== */
+.bottom-area{
+  position:absolute;
+  top:70vh;
+  left:0;
+  width:100%;
+  height:30vh;
+  background:#0b0b0b;
+  z-index:1;
+}
+
 .bottom-text{
   position:absolute;
-  top:55vh;
+  top:30px;
+  left:50%;
+  transform:translateX(-50%);
   width:100%;
   text-align:center;
-  padding-top:34px;
   z-index:2;
   font-size:21px;
   opacity:0.9;
@@ -226,7 +237,7 @@ html,body{
   background:rgba(255,255,255,0.2);
 }
 
-/* ========== 渐入动画 ========== */
+/* ========== 动画 ========== */
 @keyframes fadeInUp{
   from{
     opacity:0;
@@ -246,10 +257,10 @@ html,body{
   .opening-note{font-size:14px;}
 
   .bg-img{
-    height:52vh;
+    height:68vh;
   }
   .img-text-wrap{
-    height:52vh;
+    height:68vh;
   }
 
   .line-top{
@@ -276,9 +287,12 @@ html,body{
     font-size:18px;
   }
 
+  .bottom-area{
+    top:68vh;
+    height:32vh;
+  }
   .bottom-text{
-    top:52vh;
-    padding-top:28px;
+    top:24px;
     font-size:18px;
   }
 
@@ -309,10 +323,8 @@ html,body{
   <!-- 00 序章 -->
   <div class="page active" id="page0">
 
-    <!-- 纯背景纹理图，不带任何文字 -->
     <img src="IMG_7221.PNG" class="bg-img" alt="背景">
 
-    <!-- 所有叠加文字 -->
     <div class="img-text-wrap">
       <p class="line-top">人类无法飞翔是因为心太重吗</p>
       <p class="txt-memory">回忆</p>
@@ -321,16 +333,15 @@ html,body{
       <p class="txt-lock">铸成枷锁</p>
     </div>
 
-    <!-- 图片下方黑色区域，固定文字无动画 -->
-    <div class="bottom-text">
-      飞翔。或许也是一种痛苦？
-    </div>
+    <div class="bottom-area">
+      <p class="bottom-text">飞翔。或许也是一种痛苦？</p>
 
-    <div class="page-nav">
-      <button onclick="goPage(0)">序章</button>
-      <button onclick="goPage(1)">人物</button>
-      <button onclick="goPage(2)">须知</button>
-      <button onclick="goPage(3)">情节</button>
+      <div class="page-nav">
+        <button onclick="goPage(0)">序章</button>
+        <button onclick="goPage(1)">人物</button>
+        <button onclick="goPage(2)">须知</button>
+        <button onclick="goPage(3)">情节</button>
+      </div>
     </div>
 
   </div>
