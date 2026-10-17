@@ -13,19 +13,16 @@
   font-family:"KaiTi","楷体",STKaiti,serif;
   -webkit-tap-highlight-color:transparent;
 }
-
 html,body{
   height:100%;
   overflow:hidden;
   background:#0b0b0b;
 }
-
 .wrap{
   width:100%;
   height:100%;
   position:relative;
 }
-
 .page{
   width:100%;
   height:100vh;
@@ -37,15 +34,13 @@ html,body{
   opacity:0;
   pointer-events:none;
   transition: opacity 0.7s ease;
-  transform: translateZ(0);
 }
-
 .page.active{
   opacity:1;
   pointer-events:auto;
 }
 
-/* ========== 开场页 ========== */
+/* ========== 开场动画页面 ========== */
 .opening-wrap{
   position:absolute;
   z-index:100;
@@ -56,34 +51,28 @@ html,body{
   align-items:center;
   justify-content:center;
   background:#0b0b0b;
-  opacity:1;
   animation: fadeOut 2.8s ease-in forwards;
 }
-
 @keyframes fadeOut {
   0%{opacity:1;}
   70%{opacity:1;}
   100%{opacity:0;pointer-events:none;}
 }
-
 .opening-title{
   display:flex;
   align-items:baseline;
   justify-content:center;
 }
-
 .opening-dot{
   color:#ffffff;
   font-size:64px;
   margin-right:12px;
 }
-
 .opening-text{
   color:#ff2b2b;
   font-size:72px;
   letter-spacing:12px;
 }
-
 .opening-en{
   color:#ffffff;
   font-family: sans-serif;
@@ -91,7 +80,6 @@ html,body{
   margin-top:18px;
   letter-spacing:-1px;
 }
-
 .opening-note{
   color:#ffffff;
   font-size:16px;
@@ -100,7 +88,7 @@ html,body{
   letter-spacing:2px;
 }
 
-/* ========== 背景图：铺满上半屏 ========== */
+/* ========== 顶部背景图（占页面55%高度） ========== */
 .bg-img{
   position:absolute;
   top:0;
@@ -112,7 +100,7 @@ html,body{
   z-index:1;
 }
 
-/* ========== 图片内文字容器 ========== */
+/* ========== 图片内文字容器（绝对定位） ========== */
 .img-text-wrap{
   position:absolute;
   top:0;
@@ -120,64 +108,60 @@ html,body{
   width:100%;
   height:55vh;
   z-index:2;
-  padding:0 24px;
-  display:flex;
-  flex-direction:column;
 }
-
 .line-top{
+  position:absolute;
+  top:44px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
   text-align:center;
   font-size:23px;
-  padding-top:46px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
   animation: fadeInUp 1s ease forwards;
   animation-delay: 0.4s;
 }
-
-.left-text,
-.right-text,
-.center-text{
+.pos-left,.pos-right,.pos-center{
+  position:absolute;
   font-size:21px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
 }
+.pos-left{left:20px;}
+.pos-right{right:20px;}
+.pos-center{left:50%;transform:translateX(-50%);}
+.memory{top:24%;animation: fadeInUp 1s ease forwards;animation-delay:1.4s;}
+.emotion{top:42%;animation: fadeInUp 1s ease forwards;animation-delay:2.4s;}
+.bond{top:60%;animation: fadeInUp 1s ease forwards;animation-delay:3.4s;}
+.lock{top:78%;animation: fadeInUp 1s ease forwards;animation-delay:4.4s;}
 
-.left-text{
-  align-self:flex-start;
-  margin-left:6%;
-}
-
-.right-text{
-  align-self:flex-end;
-  margin-right:6%;
-}
-
-.center-text{
-  align-self:center;
-}
-
-.row{
-  flex:1;
-  display:flex;
-  align-items:center;
-}
-
-.row1 .left-text{ animation: fadeInUp 1s ease forwards; animation-delay:1.4s; }
-.row2 .right-text{ animation: fadeInUp 1s ease forwards; animation-delay:2.4s; }
-.row3 .left-text{ animation: fadeInUp 1s ease forwards; animation-delay:3.4s; }
-.row4 .center-text{ animation: fadeInUp 1s ease forwards; animation-delay:4.4s; }
-
-/* ========== 图片下方黑色背景文字（固定显示，无动画） ========== */
-.bottom-text{
+/* ========== 下半区域：用IMG_7225.JPG铺满，替换原来黑色背景 ========== */
+.bottom-wrap{
   position:absolute;
   top:55vh;
+  left:0;
+  width:100%;
+  height:45vh;
+  z-index:2;
+}
+.bottom-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+.bottom-text{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
   width:100%;
   text-align:center;
-  padding-top:34px;
-  z-index:2;
   font-size:21px;
-  opacity:0.9;
+  text-shadow: 0 2px 10px #000;
+  z-index:3;
 }
 
 /* ========== 底部导航按钮 ========== */
@@ -188,9 +172,8 @@ html,body{
   transform:translateX(-50%);
   display:flex;
   gap:12px;
-  z-index:3;
+  z-index:4;
 }
-
 .page-nav button{
   background:transparent;
   border:1px solid #fff;
@@ -201,21 +184,14 @@ html,body{
   color:#fff;
   font-weight:bold;
 }
-
 .page-nav button.active{
   background:rgba(255,255,255,0.2);
 }
 
-/* ========== 渐入动画 ========== */
+/* ========== 淡入动画 ========== */
 @keyframes fadeInUp{
-  from{
-    opacity:0;
-    transform:translateY(12px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(12px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 /* ========== 手机端适配 ========== */
@@ -225,46 +201,31 @@ html,body{
   .opening-en{font-size:24px;letter-spacing:-0.5px;}
   .opening-note{font-size:14px;}
 
-  .bg-img{
-    height:52vh;
-  }
+  .bg-img{height:52vh;}
+  .img-text-wrap{height:52vh;}
+  .line-top{top:36px;font-size:20px;}
+  .pos-left,.pos-right,.pos-center{font-size:18px;}
+  .pos-left{left:16px;}
+  .pos-right{right:16px;}
+  .memory{top:22%;}
+  .emotion{top:40%;}
+  .bond{top:58%;}
+  .lock{top:76%;}
 
-  .img-text-wrap{
-    height:52vh;
-  }
-
-  .line-top{
-    font-size:20px;
-    padding-top:38px;
-  }
-
-  .left-text,
-  .right-text,
-  .center-text{
-    font-size:18px;
-  }
-
-  .bottom-text{
+  .bottom-wrap{
     top:52vh;
-    padding-top:28px;
+    height:48vh;
+  }
+  .bottom-text{
     font-size:18px;
   }
-
-  .page-nav{
-    bottom:18px;
-  }
-
-  .page-nav button{
-    padding:6px 12px;
-    font-size:14px;
-  }
+  .page-nav{bottom:18px;}
+  .page-nav button{padding:6px 12px;font-size:14px;}
 }
 </style>
 </head>
-
 <body>
 <div class="wrap">
-
   <!-- 开场页 -->
   <div class="opening-wrap">
     <div class="opening-title">
@@ -275,57 +236,41 @@ html,body{
     <p class="opening-note">死无葬身之地</p>
   </div>
 
-  <!-- 00 序章 -->
+  <!-- 序章页面 -->
   <div class="page active" id="page0">
-
-    <img src="IMG_7221.PNG" class="bg-img" alt="背景">
-
+    <img src="IMG_7221.PNG" class="bg-img" alt="顶部背景">
     <div class="img-text-wrap">
       <p class="line-top">人类无法飞翔是因为心太重吗</p>
-
-      <div class="row row1">
-        <p class="left-text">回忆</p>
-      </div>
-
-      <div class="row row2">
-        <p class="right-text">情感</p>
-      </div>
-
-      <div class="row row3">
-        <p class="left-text">羁绊</p>
-      </div>
-
-      <div class="row row4">
-        <p class="center-text">铸成枷锁</p>
-      </div>
+      <p class="pos-left memory">回忆</p>
+      <p class="pos-right emotion">情感</p>
+      <p class="pos-left bond">羁绊</p>
+      <p class="pos-center lock">铸成枷锁</p>
     </div>
 
-    <!-- 图片下方黑色区域，固定文字无动画 -->
-    <div class="bottom-text">
-      飞翔.或许也是一种痛苦？
+    <!-- 下半区域 用IMG_7225.JPG铺满替换黑色区域 -->
+    <div class="bottom-wrap">
+      <img src="IMG_7225.JPG" class="bottom-img" alt="底部背景">
+      <p class="bottom-text">飞翔.或许也是一种痛苦？</p>
     </div>
 
+    <!-- 底部按钮 -->
     <div class="page-nav">
       <button onclick="goPage(0)">序章</button>
       <button onclick="goPage(1)">人物</button>
       <button onclick="goPage(2)">须知</button>
       <button onclick="goPage(3)">情节</button>
     </div>
-
   </div>
-
 </div>
 
 <script>
 const pages = document.querySelectorAll('.page');
 const navBtns = document.querySelectorAll('.page-nav button');
-
 function goPage(index){
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
   navBtns.forEach(b => b.classList.remove('active'));
 }
 </script>
-
 </body>
 </html>
