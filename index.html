@@ -104,7 +104,7 @@ html,body{
   pointer-events:auto;
 }
 
-/* ========== 序章开场遮罩 总时长 2+3 = 5秒 ========== */
+/* ========== 序章开场遮罩 总时长13秒 ========== */
 .opening-wrap{
   position:absolute;
   z-index:100;
@@ -115,32 +115,32 @@ html,body{
   align-items:center;
   justify-content:center;
   background:#0b0b0b;
-  animation: fadeOutOpening 5s ease-in forwards;
+  animation: fadeOutOpening 13s ease-in forwards;
 }
 
-/* 深渊文字：中文白色，英文红色，持续2秒 */
+/* 深渊文字：中文白色，英文红色，总动画5秒 */
 .abyss-text-cn{
   color:#ffffff;
   font-size:32px;
   margin-bottom:12px;
-  animation: abyssFade 2s ease forwards;
+  animation: abyssFade 5s ease forwards;
 }
 .abyss-text-en{
   color:#ff2b2b;
   font-size:20px;
   font-family:sans-serif;
   margin-bottom:60px;
-  animation: abyssFade 2s ease forwards;
+  animation: abyssFade 5s ease forwards;
 }
 
-/* 序章标题组：2秒之后才出现，持续3秒 */
+/* 序章标题组：延迟5秒出现，动画时长8秒 */
 .opening-title{
   display:flex;
   align-items:baseline;
   justify-content:center;
   opacity:0;
-  animation: titleShow 3s ease forwards;
-  animation-delay:2s;
+  animation: titleShow 8s ease forwards;
+  animation-delay:5s;
 }
 .opening-dot{
   color:#ffffff;
@@ -159,35 +159,35 @@ html,body{
   margin-top:18px;
   letter-spacing:-1px;
   opacity:0;
-  animation: titleShow 3s ease forwards;
-  animation-delay:2s;
+  animation: titleShow 8s ease forwards;
+  animation-delay:5s;
 }
 .opening-note{
   color:#ffffff;
   font-size:16px;
   margin-top:10px;
   opacity:0;
-  animation: titleShow 3s ease forwards;
-  animation-delay:2s;
+  animation: titleShow 8s ease forwards;
+  animation-delay:5s;
 }
 
-/* 深渊句动画：0~2秒，淡入，2秒结束淡出 */
+/* 深渊台词动画：淡入 -> 长时间停留 -> 末尾淡出 */
 @keyframes abyssFade{
   0%{opacity:0;}
-  15%{opacity:1;}
-  85%{opacity:1;}
+  12%{opacity:1;}
+  88%{opacity:1;}
   100%{opacity:0;}
 }
-/* 序章标题动画：延迟2秒出现，3秒内保持可见 */
+/* 序章标题动画：淡入之后全程保持可见 */
 @keyframes titleShow{
   0%{opacity:0;}
-  15%{opacity:1;}
+  12%{opacity:1;}
   100%{opacity:1;}
 }
-/* 整个黑色遮罩：5秒全部结束之后消失 */
+/* 黑色遮罩，直到13秒最后一刻才消失 */
 @keyframes fadeOutOpening {
   0%{opacity:1;}
-  90%{opacity:1;}
+  92%{opacity:1;}
   100%{opacity:0;pointer-events:none;}
 }
 
