@@ -2,18 +2,21 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 <title>寂生 - Allothiri</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;color:#f0f0f0;font-family:"PingFang SC",system-ui,serif;}
+*{margin:0;padding:0;box-sizing:border-box;color:#f0f0f0;font-family:"PingFang SC",system-ui,serif;
+-webkit-tap-highlight-color:transparent; /* 消除手机点击黑块高亮 */
+}
 html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 
 .wrap{width:100%;height:100%;position:relative;}
 
-/* 全屏页面 + 淡入淡出动画 */
+/* 全屏页面，增加硬件加速，修复黑屏闪烁 */
 .page{
   width:100%;
   height:100vh;
+  height:100dvh;
   position:absolute;
   top:0;
   left:0;
@@ -23,6 +26,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   opacity:0;
   pointer-events:none;
   transition: opacity 0.7s ease;
+  transform: translateZ(0); /* GPU硬件加速，解决切页黑屏闪烁 */
   display:flex;
   align-items:center;
   justify-content:center;
@@ -30,7 +34,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 }
 .page.active{
   opacity:1;
-  pointer-events:auto;
+  pointer-events:auto; /* 激活页面，允许点击（链接生效） */
 }
 
 /* 右上角导航栏 */
@@ -124,8 +128,26 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 .page3-content{text-align:center;}
 .page3-content h2{font-size:32px;margin-bottom:30px;opacity:0.9;}
 .link-box{display:flex;flex-direction:column;gap:20px;}
-.link-box a{font-size:18px;color:#ddd;opacity:0.8;text-decoration:none;}
+.link-box a{font-size:18px;color:#ddd;opacity:0.8;text-decoration:none;position:relative;z-index:10;}
 .link-box a:hover{opacity:1;}
+
+/* ========== 移动端适配【核心新增】屏幕宽度小于768px自动调整 ========== */
+@media (max-width:768px){
+  .page{padding:20px;}
+  /* 相遇页左右排版 → 上下堆叠 */
+  .page1-wrap{flex-direction:column;gap:30px;text-align:center;}
+  .page1-text h1{font-size:72px;}
+  .tag-group{justify-content:center;max-width:100%;}
+  .page1-img-group{width:300px;height:360px;transform:scale(0.9);}
+  /* 须知页左右分栏 → 上下堆叠 */
+  .page2-wrap{flex-direction:column;gap:24px;max-width:100%;}
+  .page2-left-img{width:100%;height:240px;}
+  .rule-item{font-size:14px;}
+  /* 右上角导航缩小 */
+  .top-nav button{padding:5px 10px;font-size:12px;}
+  /* 左下角签名缩小 */
+  .footer-signature{left:12px;font-size:10px;}
+}
 </style>
 </head>
 <body>
@@ -161,12 +183,15 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 <div class="tag-group">
 <span class="tag">infp</span>
 <span class="tag">男</span>
-<span class="tag">22</span>
-<span class="tag">低无</span>
+<span class="tag">17</span>
+<span class="tag">三无</span>
+<span class="tag">伪救赎</span>
 <span class="tag">剖析</span>
-<span class="tag">温虐</span>
+<span class="tag">白话</span>
 <span class="tag">意识流</span>
 <span class="tag">温柔刀</span>
+</div>
+<p class="tip">常驻 · 上春山 / 游园地</p>
 </div>
 <div class="page1-img-group">
 <div class="img-card a"></div>
@@ -251,7 +276,7 @@ function prevPage(){
   current = (current -1 + totalPage) % totalPage;
   render();
 }
-//鼠标滚轮翻页
+//鼠标滚轮翻页（仅电脑）
 document.addEventListener('wheel',e=>{
   if(e.deltaY>0) nextPage();
   else prevPage();
