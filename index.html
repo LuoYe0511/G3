@@ -20,8 +20,6 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   top:0;
   left:0;
   background:#0b0b0b;
-  background-size:cover;
-  background-position:center;
   opacity:0;
   pointer-events:none;
   transition: opacity 0.7s ease;
@@ -36,13 +34,28 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   pointer-events:auto;
 }
 
-/* ========== 序章页GIF：竖图GIF，靠左垂直居中 ========== */
-#page0{
-  background-image:url("ezgif-115dd172c4a0c2a2.gif");
-  background-size:auto 100%;
-  background-position:left center;
-  background-repeat:no-repeat;
+/* ========== 左侧竖GIF图片容器 ========== */
+.gif-left{
+  position:absolute;
+  left:0;
+  top:0;
+  height:100%;
+  width:auto;
+  z-index:1;
 }
+.gif-left img{
+  height:100%;
+  width:auto;
+  display:block;
+}
+
+/* 中间文字 */
+.page0-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+.page0-content .main-line{font-size:28px;margin-bottom:12px;opacity:0.9;letter-spacing:2px;}
 
 /* 右上角导航栏 【序章 人物 须知 情节】 */
 .top-nav{
@@ -101,17 +114,9 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   line-height:1.6;
 }
 
-/* ========== 序章页面文案 ========== */
-.page0-content{text-align:center;}
-.page0-content .main-line{font-size:28px;margin-bottom:12px;opacity:0.9;letter-spacing:2px;}
-
-/* ========== 手机端适配（竖GIF兼容方案） ========== */
+/* ========== 手机端适配 ========== */
 @media (max-width:768px){
   .page{padding:20px;}
-  #page0{
-    background-size:auto 100%;
-    background-position:left center;
-  }
   .page0-content .main-line{font-size:22px;}
   .top-nav button{padding:5px 10px;font-size:12px;}
   .footer-signature{font-size:10px;}
@@ -130,7 +135,24 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 
 <!-- 00 序章，默认active打开直接显示 -->
 <div class="page active" id="page0">
-<div class="page0-content">
-<p class="main-line">缓缓飘落的枫叶像思念</p>
+  <!-- 左侧GIF -->
+  <div class="gif-left">
+    <img src="ezgif-115dd172c4a0c2a2.gif" alt="动画">
+  </div>
+  <div class="page0-content">
+    <p class="main-line">缓缓飘落的枫叶像思念</p>
+  </div>
 </div>
-</div>
+
+<!-- JS页面切换 -->
+<script>
+const pages = document.querySelectorAll('.page');
+const navBtns = document.querySelectorAll('.top-nav button');
+function goPage(index){
+  pages.forEach(p => p.classList.remove('active'));
+  pages[index].classList.add('active');
+  navBtns.forEach(b => b.classList.remove('active'));
+  navBtns[index].classList.add('active');
+}
+</script>
+</body>
