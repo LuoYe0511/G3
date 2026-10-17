@@ -26,6 +26,66 @@ html,body{
   position:relative;
 }
 
+/* ========== 首页封面点击页 ========== */
+.cover-wrap{
+  position:absolute;
+  z-index:200;
+  width:100%;
+  height:100%;
+  background:#0b0b0b;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: opacity 1s ease;
+}
+.cover-wrap.fade-out{
+  opacity:0;
+  pointer-events:none;
+}
+.cover-inner{
+  position:relative;
+  max-width:70%;
+  max-height:70vh;
+}
+.cover-img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+.cover-note{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  text-align:right;
+  line-height:1.6;
+}
+.cover-cn{
+  display:block;
+  color:#ffffff;
+  font-size:20px;
+  text-shadow: 0 2px 8px #000;
+}
+.cover-en{
+  display:block;
+  color:#ff2b2b;
+  font-size:16px;
+  font-family: sans-serif;
+  text-shadow: 0 2px 8px #000;
+}
+.tip-text{
+  position:absolute;
+  bottom:80px;
+  width:100%;
+  text-align:center;
+  font-size:16px;
+  color:#fff;
+  opacity:0.6;
+  z-index:210;
+}
+
+/* ========== 原来的序章页面 ========== */
 .page{
   width:100%;
   height:100vh;
@@ -39,13 +99,12 @@ html,body{
   transition: opacity 0.7s ease;
   transform: translateZ(0);
 }
-
 .page.active{
   opacity:1;
   pointer-events:auto;
 }
 
-/* ========== 开场页 ========== */
+/* ========== 开场序章动画（你原来的序章标题） ========== */
 .opening-wrap{
   position:absolute;
   z-index:100;
@@ -59,7 +118,6 @@ html,body{
   opacity:1;
   animation: fadeOut 2.8s ease-in forwards;
 }
-
 @keyframes fadeOut {
   0%{opacity:1;}
   70%{opacity:1;}
@@ -71,19 +129,16 @@ html,body{
   align-items:baseline;
   justify-content:center;
 }
-
 .opening-dot{
   color:#ffffff;
   font-size:64px;
   margin-right:12px;
 }
-
 .opening-text{
   color:#ff2b2b;
   font-size:72px;
   letter-spacing:12px;
 }
-
 .opening-en{
   color:#ffffff;
   font-family: sans-serif;
@@ -91,7 +146,6 @@ html,body{
   margin-top:18px;
   letter-spacing:-1px;
 }
-
 .opening-note{
   color:#ffffff;
   font-size:16px;
@@ -122,7 +176,7 @@ html,body{
   z-index:2;
 }
 
-/* 顶部标题【修复居中，移除left+translate冲突】 */
+/* 顶部标题【稳定居中】 */
 .line-top{
   position:absolute;
   top:8%;
@@ -171,7 +225,7 @@ html,body{
   animation-delay:3.4s;
 }
 
-/* 铸成枷锁【修复居中】 */
+/* 铸成枷锁【稳定居中】 */
 .txt-lock{
   position:absolute;
   top:76%;
@@ -194,7 +248,6 @@ html,body{
   background:#0b0b0b;
   z-index:1;
 }
-
 .bottom-text{
   position:absolute;
   top:30px;
@@ -228,7 +281,7 @@ html,body{
   background:rgba(255,255,255,0.2);
 }
 
-/* ========== 动画 ========== */
+/* ========== 文字上浮动画 ========== */
 @keyframes fadeInUp{
   from{
     opacity:0;
@@ -298,20 +351,30 @@ html,body{
 <body>
 <div class="wrap">
 
-  <!-- 开场页 -->
-  <div class="opening-wrap">
-    <div class="opening-title">
-      <span class="opening-dot">●</span>
-      <span class="opening-text">序章</span>
+  <!-- 封面首页 -->
+  <div class="cover-wrap" id="coverPage">
+    <div class="cover-inner">
+      <img src="IMG_7232.JPG" class="cover-img" alt="封面">
+      <div class="cover-note">
+        <span class="cover-cn">请谨慎阅读此书</span>
+        <span class="cover-en">Please read this book with caution.</span>
+      </div>
     </div>
-    <p class="opening-en">Allothiri</p>
-    <p class="opening-note">死无葬身之地</p>
+    <p class="tip-text">点击屏幕进入序章</p>
   </div>
 
-  <!-- 00 序章 -->
-  <div class="page active" id="page0">
+  <!-- 序章主页面 -->
+  <div class="page" id="mainPage">
+    <div class="opening-wrap">
+      <div class="opening-title">
+        <span class="opening-dot">●</span>
+        <span class="opening-text">序章</span>
+      </div>
+      <p class="opening-en">Allothiri</p>
+      <p class="opening-note">死无葬身之地</p>
+    </div>
 
-    <img src="IMG_7221.PNG" class="bg-img" alt="背景">
+    <img src="IMG_7221.JPG" class="bg-img" alt="背景">
 
     <div class="img-text-wrap">
       <p class="line-top">人类无法飞翔是因为心太重吗</p>
@@ -331,19 +394,25 @@ html,body{
         <button onclick="goPage(3)">情节</button>
       </div>
     </div>
-
   </div>
 
 </div>
 
 <script>
-const pages = document.querySelectorAll('.page');
-const navBtns = document.querySelectorAll('.page-nav button');
+// 封面点击进入序章
+document.getElementById('coverPage').addEventListener('click', function(){
+  this.classList.add('fade-out');
+  setTimeout(() => {
+    this.style.display = 'none';
+    document.getElementById('mainPage').classList.add('active');
+  }, 1000);
+});
 
+// 页面切换
 function goPage(index){
+  const pages = document.querySelectorAll('.page');
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
-  navBtns.forEach(b => b.classList.remove('active'));
 }
 </script>
 
