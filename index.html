@@ -37,6 +37,7 @@ html,body{
   opacity:0;
   pointer-events:none;
   transition: opacity 0.7s ease;
+  transform: translateZ(0);
 }
 
 .page.active{
@@ -55,6 +56,7 @@ html,body{
   align-items:center;
   justify-content:center;
   background:#0b0b0b;
+  opacity:1;
   animation: fadeOut 2.8s ease-in forwards;
 }
 
@@ -98,13 +100,13 @@ html,body{
   letter-spacing:2px;
 }
 
-/* ========== 顶部背景图：缩小，给手机端标题留空间 ========== */
+/* ========== 背景图：铺满上半屏 ========== */
 .bg-img{
   position:absolute;
   top:0;
   left:0;
   width:100%;
-  height:40vh;
+  height:55vh;
   object-fit:cover;
   object-position:center top;
   z-index:1;
@@ -116,77 +118,66 @@ html,body{
   top:0;
   left:0;
   width:100%;
-  height:40vh;
+  height:55vh;
   z-index:2;
+  padding:0 24px;
+  display:flex;
+  flex-direction:column;
 }
 
-/* 主标题：手机端一定可见 */
 .line-top{
-  position:absolute;
-  top:16px;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
   text-align:center;
-  font-size:21px;
+  font-size:23px;
+  padding-top:46px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
   animation: fadeInUp 1s ease forwards;
   animation-delay: 0.4s;
 }
 
-.pos-left,
-.pos-right,
-.pos-center{
-  position:absolute;
-  font-size:20px;
+.left-text,
+.right-text,
+.center-text{
+  font-size:21px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
 }
 
-.pos-left{left:18px;}
-.pos-right{right:18px;}
-.pos-center{left:50%;transform:translateX(-50%);}
-
-.memory{top:28%;animation: fadeInUp 1s ease forwards;animation-delay:1.4s;}
-.emotion{top:50%;animation: fadeInUp 1s ease forwards;animation-delay:2.4s;}
-.bond{top:72%;animation: fadeInUp 1s ease forwards;animation-delay:3.4s;}
-.lock{top:90%;animation: fadeInUp 1s ease forwards;animation-delay:4.4s;}
-
-/* ========== 下半区域：黑色区域更大，底部图更小 ========== */
-.bottom-wrap{
-  position:absolute;
-  top:40vh;
-  left:0;
-  width:100%;
-  height:60vh;
-  z-index:2;
-  background:#0b0b0b;
+.left-text{
+  align-self:flex-start;
+  margin-left:6%;
 }
 
-/* 底部图片只占下半区一部分 */
-.bottom-img{
-  position:absolute;
-  left:0;
-  bottom:60px;
-  width:100%;
-  height:30vh;
-  object-fit:cover;
-  object-position:center;
-  display:block;
+.right-text{
+  align-self:flex-end;
+  margin-right:6%;
 }
 
+.center-text{
+  align-self:center;
+}
+
+.row{
+  flex:1;
+  display:flex;
+  align-items:center;
+}
+
+.row1 .left-text{ animation: fadeInUp 1s ease forwards; animation-delay:1.4s; }
+.row2 .right-text{ animation: fadeInUp 1s ease forwards; animation-delay:2.4s; }
+.row3 .left-text{ animation: fadeInUp 1s ease forwards; animation-delay:3.4s; }
+.row4 .center-text{ animation: fadeInUp 1s ease forwards; animation-delay:4.4s; }
+
+/* ========== 图片下方黑色背景文字（固定显示，无动画） ========== */
 .bottom-text{
   position:absolute;
-  left:50%;
-  bottom:calc(30vh + 70px);
-  transform:translateX(-50%);
+  top:55vh;
   width:100%;
   text-align:center;
-  font-size:20px;
-  text-shadow: 0 2px 10px #000;
-  z-index:3;
-  white-space:nowrap;
+  padding-top:34px;
+  z-index:2;
+  font-size:21px;
+  opacity:0.9;
 }
 
 /* ========== 底部导航按钮 ========== */
@@ -197,7 +188,7 @@ html,body{
   transform:translateX(-50%);
   display:flex;
   gap:12px;
-  z-index:4;
+  z-index:3;
 }
 
 .page-nav button{
@@ -215,7 +206,7 @@ html,body{
   background:rgba(255,255,255,0.2);
 }
 
-/* ========== 淡入动画 ========== */
+/* ========== 渐入动画 ========== */
 @keyframes fadeInUp{
   from{
     opacity:0;
@@ -235,44 +226,27 @@ html,body{
   .opening-note{font-size:14px;}
 
   .bg-img{
-    height:36vh;
+    height:52vh;
   }
 
   .img-text-wrap{
-    height:36vh;
+    height:52vh;
   }
 
   .line-top{
-    top:12px;
+    font-size:20px;
+    padding-top:38px;
+  }
+
+  .left-text,
+  .right-text,
+  .center-text{
     font-size:18px;
   }
 
-  .pos-left,
-  .pos-right,
-  .pos-center{
-    font-size:17px;
-  }
-
-  .pos-left{left:14px;}
-  .pos-right{right:14px;}
-
-  .memory{top:26%;}
-  .emotion{top:48%;}
-  .bond{top:70%;}
-  .lock{top:88%;}
-
-  .bottom-wrap{
-    top:36vh;
-    height:64vh;
-  }
-
-  .bottom-img{
-    bottom:56px;
-    height:26vh;
-  }
-
   .bottom-text{
-    bottom:calc(26vh + 64px);
+    top:52vh;
+    padding-top:28px;
     font-size:18px;
   }
 
@@ -301,27 +275,36 @@ html,body{
     <p class="opening-note">死无葬身之地</p>
   </div>
 
-  <!-- 序章页面 -->
+  <!-- 00 序章 -->
   <div class="page active" id="page0">
 
-    <img src="IMG_7221.PNG" class="bg-img" alt="顶部背景">
+    <img src="IMG_7221.PNG" class="bg-img" alt="背景">
 
     <div class="img-text-wrap">
       <p class="line-top">人类无法飞翔是因为心太重吗</p>
 
-      <p class="pos-left memory">回忆</p>
-      <p class="pos-right emotion">情感</p>
-      <p class="pos-left bond">羁绊</p>
-      <p class="pos-center lock">铸成枷锁</p>
+      <div class="row row1">
+        <p class="left-text">回忆</p>
+      </div>
+
+      <div class="row row2">
+        <p class="right-text">情感</p>
+      </div>
+
+      <div class="row row3">
+        <p class="left-text">羁绊</p>
+      </div>
+
+      <div class="row row4">
+        <p class="center-text">铸成枷锁</p>
+      </div>
     </div>
 
-    <!-- 下半区域：黑色区域更大，底部图更小 -->
-    <div class="bottom-wrap">
-      <img src="IMG_7225.JPG" class="bottom-img" alt="底部背景">
-      <p class="bottom-text">飞翔.或许也是一种痛苦？</p>
+    <!-- 图片下方黑色区域，固定文字无动画 -->
+    <div class="bottom-text">
+      飞翔.或许也是一种痛苦？
     </div>
 
-    <!-- 底部按钮 -->
     <div class="page-nav">
       <button onclick="goPage(0)">序章</button>
       <button onclick="goPage(1)">人物</button>
