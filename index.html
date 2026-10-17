@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 <title>寂生 - Allothiri</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;color:#f0f0f0;font-family:"PingFang SC",system-ui,serif;
+*{margin:0;padding:0;box-sizing:border-box;color:#fff;font-family:"KaiTi","楷体",STKaiti,serif;
 -webkit-tap-highlight-color:transparent;
 }
 html,body{height:100%;overflow:hidden;background:#0b0b0b;}
@@ -55,67 +55,57 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   z-index:2;
   text-align:center;
 }
-.page0-content .line1{font-size:28px;margin-bottom:16px;opacity:0.9;letter-spacing:2px;}
-.page0-content .line2{font-size:24px;margin-bottom:32px;opacity:0.8;letter-spacing:2px;}
+.page0-content .line-top{
+  font-size:28px;
+  margin-bottom:16px;
+  letter-spacing:2px;
+  text-align:left;
+}
+.page0-content .line-top span{
+  display:block;
+  text-align:right;
+}
+.page0-content .line-middle{
+  font-size:24px;
+  margin-bottom:32px;
+  letter-spacing:2px;
+  text-align:center;
+}
+.page0-content .divider{
+  font-size:28px;
+  color:#ffffff;
+  letter-spacing:4px;
+  margin-bottom:32px;
+  opacity:1;
+}
 
-/* 导航按钮，放到文字下方 */
+/* 导航按钮：方框包裹，字体加粗加深 */
 .page-nav{
   display:flex;
-  gap:6px;
+  gap:12px;
   justify-content:center;
 }
 .page-nav button{
   background:transparent;
-  border:none;
-  padding:7px 16px;
-  border-radius:999px;
+  border:1px solid #fff;
+  padding:8px 18px;
+  border-radius:4px;
   cursor:pointer;
-  font-size:14px;
-  opacity:0.75;
+  font-size:16px;
+  color:#fff;
+  font-weight:bold;
 }
 .page-nav button.active{
-  background:rgba(255,255,255,0.18);
-  opacity:1;
-}
-
-/* 底部翻页控件 */
-.bottom-pager{
-  position:fixed;
-  bottom:70px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  align-items:center;
-  gap:20px;
-  z-index:99;
-}
-.arrow{
-  width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(255,255,255,0.3);
-  background:transparent;color:#fff;
-  cursor:pointer;
-}
-.page-text-num{font-size:14px;opacity:0.7;letter-spacing:1px;}
-
-/* ========== 签名：移到页面底部居中 ========== */
-.footer-signature{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  text-align:center;
-  font-size:12px;
-  opacity:0.55;
-  line-height:1.6;
+  background:rgba(255,255,255,0.2);
 }
 
 /* ========== 手机端适配 ========== */
 @media (max-width:768px){
   .page{padding:20px;}
-  .page0-content .line1{font-size:22px;}
-  .page0-content .line2{font-size:19px;}
-  .page-nav button{padding:5px 10px;font-size:12px;}
-  .footer-signature{font-size:10px;}
+  .page0-content .line-top{font-size:22px;}
+  .page0-content .line-middle{font-size:19px;}
+  .page0-content .divider{font-size:22px;}
+  .page-nav button{padding:6px 12px;font-size:14px;}
 }
 </style>
 </head>
@@ -129,9 +119,10 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
     <img src="ezgif-115dd172c4a0c2a2.gif" alt="动画">
   </div>
   <div class="page0-content">
-    <p class="line1">一本书读第二次会有新感悟 但不会有新结局</p>
-    <p class="line2">何可言 何能言 何处言</p>
-    <!-- 导航按钮移到文案下方：序章 人物 须知 情节 -->
+    <p class="line-top">一本书读第二次会有新感悟<span>但不会有新结局</span></p>
+    <p class="line-middle">何可言 何能言 何处言</p>
+    <div class="divider">——————————</div>
+    <!-- 导航按钮居中，方框+加粗字体 -->
     <div class="page-nav">
       <button onclick="goPage(0)">序章</button>
       <button onclick="goPage(1)">人物</button>
