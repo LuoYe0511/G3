@@ -85,22 +85,24 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   letter-spacing:2px;
 }
 
-/* ========== 顶部居中静态图片 ========== */
+/* ========== 顶部图片：宽度铺满，占屏幕上半区 ========== */
 .top-image{
   position:absolute;
-  top:46%;
+  top:38%;
   left:50%;
   transform:translate(-50%,-50%);
   z-index:2;
-  max-width:90%;
-  max-height:40vh;
-  object-fit:contain;
+  width:100%;
+  max-width:100%;
+  max-height:50vh;
+  object-fit:cover;
+  object-position:center top;
 }
 
-/* 中间文字区域，放到图片下方 */
+/* 中间文字区域，随图片上移 */
 .page0-content{
   position:absolute;
-  top:calc(46% + 40vh * 0.5);
+  top:calc(38% + 50vh * 0.5);
   left:50%;
   transform:translate(-50%,-50%);
   z-index:3;
@@ -137,7 +139,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   opacity:1;
 }
 
-/* 下方居中文案 */
+/* 下方新文案：飞翔.或许也是一种痛苦？ */
 .line-middle{
   font-size:24px;
   margin-bottom:40px;
@@ -174,12 +176,14 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   .opening-note{font-size:14px;}
 
   .top-image{
-    top:44%;
-    max-height:35vh;
+    top:36%;
+    width:100%;
+    max-width:100%;
+    max-height:50vh;
   }
 
   .page0-content{
-    top:calc(44% + 35vh * 0.5);
+    top:calc(36% + 50vh * 0.5);
   }
 
   .main-text .line1{font-size:22px;}
@@ -205,7 +209,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 
 <!-- 00 序章 -->
 <div class="page active" id="page0">
-  <!-- 静态图：顶部居中 -->
+  <!-- 静态图：铺满宽度，占屏幕上半部分 -->
   <img src="IMG_7221.PNG" alt="顶部图片" class="top-image">
 
   <!-- 文字在图片下方 -->
@@ -216,7 +220,8 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
       <p class="line3">铸成枷锁</p>
     </div>
 
-    <p class="line-middle">飞翔.或许也是一种痛苦?</p>
+    <!-- 已经替换成图片里这句 -->
+    <p class="line-middle">飞翔.或许也是一种痛苦？</p>
 
     <div class="page-nav">
       <button onclick="goPage(0)">序章</button>
