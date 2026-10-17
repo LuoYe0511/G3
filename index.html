@@ -13,16 +13,19 @@
   font-family:"KaiTi","楷体",STKaiti,serif;
   -webkit-tap-highlight-color:transparent;
 }
+
 html,body{
   height:100%;
   overflow:hidden;
   background:#0b0b0b;
 }
+
 .wrap{
   width:100%;
   height:100%;
   position:relative;
 }
+
 .page{
   width:100%;
   height:100vh;
@@ -35,12 +38,13 @@ html,body{
   pointer-events:none;
   transition: opacity 0.7s ease;
 }
+
 .page.active{
   opacity:1;
   pointer-events:auto;
 }
 
-/* ========== 开场动画页面 ========== */
+/* ========== 开场页 ========== */
 .opening-wrap{
   position:absolute;
   z-index:100;
@@ -53,26 +57,31 @@ html,body{
   background:#0b0b0b;
   animation: fadeOut 2.8s ease-in forwards;
 }
+
 @keyframes fadeOut {
   0%{opacity:1;}
   70%{opacity:1;}
   100%{opacity:0;pointer-events:none;}
 }
+
 .opening-title{
   display:flex;
   align-items:baseline;
   justify-content:center;
 }
+
 .opening-dot{
   color:#ffffff;
   font-size:64px;
   margin-right:12px;
 }
+
 .opening-text{
   color:#ff2b2b;
   font-size:72px;
   letter-spacing:12px;
 }
+
 .opening-en{
   color:#ffffff;
   font-family: sans-serif;
@@ -80,6 +89,7 @@ html,body{
   margin-top:18px;
   letter-spacing:-1px;
 }
+
 .opening-note{
   color:#ffffff;
   font-size:16px;
@@ -88,80 +98,95 @@ html,body{
   letter-spacing:2px;
 }
 
-/* ========== 顶部背景图（占页面55%高度） ========== */
+/* ========== 顶部背景图：缩小，给手机端标题留空间 ========== */
 .bg-img{
   position:absolute;
   top:0;
   left:0;
   width:100%;
-  height:55vh;
+  height:40vh;
   object-fit:cover;
   object-position:center top;
   z-index:1;
 }
 
-/* ========== 图片内文字容器（绝对定位） ========== */
+/* ========== 图片内文字容器 ========== */
 .img-text-wrap{
   position:absolute;
   top:0;
   left:0;
   width:100%;
-  height:55vh;
+  height:40vh;
   z-index:2;
 }
+
+/* 主标题：手机端一定可见 */
 .line-top{
   position:absolute;
-  top:44px;
+  top:16px;
   left:50%;
   transform:translateX(-50%);
   width:100%;
   text-align:center;
-  font-size:23px;
+  font-size:21px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
   animation: fadeInUp 1s ease forwards;
   animation-delay: 0.4s;
 }
-.pos-left,.pos-right,.pos-center{
+
+.pos-left,
+.pos-right,
+.pos-center{
   position:absolute;
-  font-size:21px;
+  font-size:20px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
 }
-.pos-left{left:20px;}
-.pos-right{right:20px;}
-.pos-center{left:50%;transform:translateX(-50%);}
-.memory{top:24%;animation: fadeInUp 1s ease forwards;animation-delay:1.4s;}
-.emotion{top:42%;animation: fadeInUp 1s ease forwards;animation-delay:2.4s;}
-.bond{top:60%;animation: fadeInUp 1s ease forwards;animation-delay:3.4s;}
-.lock{top:78%;animation: fadeInUp 1s ease forwards;animation-delay:4.4s;}
 
-/* ========== 下半区域：用IMG_7225.JPG铺满，替换原来黑色背景 ========== */
+.pos-left{left:18px;}
+.pos-right{right:18px;}
+.pos-center{left:50%;transform:translateX(-50%);}
+
+.memory{top:28%;animation: fadeInUp 1s ease forwards;animation-delay:1.4s;}
+.emotion{top:50%;animation: fadeInUp 1s ease forwards;animation-delay:2.4s;}
+.bond{top:72%;animation: fadeInUp 1s ease forwards;animation-delay:3.4s;}
+.lock{top:90%;animation: fadeInUp 1s ease forwards;animation-delay:4.4s;}
+
+/* ========== 下半区域：黑色区域更大，底部图更小 ========== */
 .bottom-wrap{
   position:absolute;
-  top:55vh;
+  top:40vh;
   left:0;
   width:100%;
-  height:45vh;
+  height:60vh;
   z-index:2;
+  background:#0b0b0b;
 }
+
+/* 底部图片只占下半区一部分 */
 .bottom-img{
+  position:absolute;
+  left:0;
+  bottom:60px;
   width:100%;
-  height:100%;
+  height:30vh;
   object-fit:cover;
   object-position:center;
   display:block;
 }
+
 .bottom-text{
   position:absolute;
-  top:50%;
   left:50%;
-  transform:translate(-50%,-50%);
+  bottom:calc(30vh + 70px);
+  transform:translateX(-50%);
   width:100%;
   text-align:center;
-  font-size:21px;
+  font-size:20px;
   text-shadow: 0 2px 10px #000;
   z-index:3;
+  white-space:nowrap;
 }
 
 /* ========== 底部导航按钮 ========== */
@@ -174,6 +199,7 @@ html,body{
   gap:12px;
   z-index:4;
 }
+
 .page-nav button{
   background:transparent;
   border:1px solid #fff;
@@ -184,14 +210,21 @@ html,body{
   color:#fff;
   font-weight:bold;
 }
+
 .page-nav button.active{
   background:rgba(255,255,255,0.2);
 }
 
 /* ========== 淡入动画 ========== */
 @keyframes fadeInUp{
-  from{opacity:0;transform:translateY(12px);}
-  to{opacity:1;transform:translateY(0);}
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 /* ========== 手机端适配 ========== */
@@ -201,31 +234,63 @@ html,body{
   .opening-en{font-size:24px;letter-spacing:-0.5px;}
   .opening-note{font-size:14px;}
 
-  .bg-img{height:52vh;}
-  .img-text-wrap{height:52vh;}
-  .line-top{top:36px;font-size:20px;}
-  .pos-left,.pos-right,.pos-center{font-size:18px;}
-  .pos-left{left:16px;}
-  .pos-right{right:16px;}
-  .memory{top:22%;}
-  .emotion{top:40%;}
-  .bond{top:58%;}
-  .lock{top:76%;}
-
-  .bottom-wrap{
-    top:52vh;
-    height:48vh;
+  .bg-img{
+    height:36vh;
   }
-  .bottom-text{
+
+  .img-text-wrap{
+    height:36vh;
+  }
+
+  .line-top{
+    top:12px;
     font-size:18px;
   }
-  .page-nav{bottom:18px;}
-  .page-nav button{padding:6px 12px;font-size:14px;}
+
+  .pos-left,
+  .pos-right,
+  .pos-center{
+    font-size:17px;
+  }
+
+  .pos-left{left:14px;}
+  .pos-right{right:14px;}
+
+  .memory{top:26%;}
+  .emotion{top:48%;}
+  .bond{top:70%;}
+  .lock{top:88%;}
+
+  .bottom-wrap{
+    top:36vh;
+    height:64vh;
+  }
+
+  .bottom-img{
+    bottom:56px;
+    height:26vh;
+  }
+
+  .bottom-text{
+    bottom:calc(26vh + 64px);
+    font-size:18px;
+  }
+
+  .page-nav{
+    bottom:18px;
+  }
+
+  .page-nav button{
+    padding:6px 12px;
+    font-size:14px;
+  }
 }
 </style>
 </head>
+
 <body>
 <div class="wrap">
+
   <!-- 开场页 -->
   <div class="opening-wrap">
     <div class="opening-title">
@@ -238,16 +303,19 @@ html,body{
 
   <!-- 序章页面 -->
   <div class="page active" id="page0">
+
     <img src="IMG_7221.PNG" class="bg-img" alt="顶部背景">
+
     <div class="img-text-wrap">
       <p class="line-top">人类无法飞翔是因为心太重吗</p>
+
       <p class="pos-left memory">回忆</p>
       <p class="pos-right emotion">情感</p>
       <p class="pos-left bond">羁绊</p>
       <p class="pos-center lock">铸成枷锁</p>
     </div>
 
-    <!-- 下半区域 用IMG_7225.JPG铺满替换黑色区域 -->
+    <!-- 下半区域：黑色区域更大，底部图更小 -->
     <div class="bottom-wrap">
       <img src="IMG_7225.JPG" class="bottom-img" alt="底部背景">
       <p class="bottom-text">飞翔.或许也是一种痛苦？</p>
@@ -260,17 +328,21 @@ html,body{
       <button onclick="goPage(2)">须知</button>
       <button onclick="goPage(3)">情节</button>
     </div>
+
   </div>
+
 </div>
 
 <script>
 const pages = document.querySelectorAll('.page');
 const navBtns = document.querySelectorAll('.page-nav button');
+
 function goPage(index){
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
   navBtns.forEach(b => b.classList.remove('active'));
 }
 </script>
+
 </body>
 </html>
