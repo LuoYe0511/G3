@@ -34,27 +34,54 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   pointer-events:auto;
 }
 
-/* ========== 开场 ●序章 动画 白色楷体 ========== */
-.opening-title{
+/* ========== 开场页：白色● + 红色序章 + Allothiri + 注解 ========== */
+.opening-wrap{
   position:absolute;
   z-index:100;
   width:100%;
   height:100%;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
   background:#0b0b0b;
-  font-size:72px;
-  letter-spacing:12px;
-  color:#ffffff;
-  font-family:"KaiTi","楷体",STKaiti,serif;
   opacity:1;
-  animation: fadeOut 2.5s ease-in forwards;
+  animation: fadeOut 2.8s ease-in forwards;
 }
 @keyframes fadeOut {
   0%{opacity:1;}
-  68%{opacity:1;}
+  70%{opacity:1;}
   100%{opacity:0;pointer-events:none;}
+}
+
+.opening-title{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  font-family:"KaiTi","楷体",STKaiti,serif;
+}
+.opening-dot{
+  color:#ffffff;
+  font-size:64px;
+  margin-right:12px;
+}
+.opening-text{
+  color:#ff2b2b;
+  font-size:72px;
+  letter-spacing:12px;
+}
+.opening-en{
+  color:#ffffff;
+  font-size:22px;
+  margin-top:18px;
+  letter-spacing:4px;
+}
+.opening-note{
+  color:#ffffff;
+  font-size:16px;
+  margin-top:10px;
+  opacity:0.85;
+  letter-spacing:2px;
 }
 
 /* ========== 左侧竖GIF图片容器 ========== */
@@ -79,7 +106,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   text-align:center;
 }
 
-/* 两行文案错开叠放：第一行靠左，第二行靠右 */
+/* 两行文案错开叠放 */
 .stagger-text{
   position:relative;
   width:100%;
@@ -131,7 +158,10 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 /* ========== 手机端适配 ========== */
 @media (max-width:768px){
   .page{padding:20px;}
-  .opening-title{font-size:48px;}
+  .opening-dot{font-size:44px;}
+  .opening-text{font-size:48px;}
+  .opening-en{font-size:18px;}
+  .opening-note{font-size:14px;}
   .stagger-text .line1{font-size:22px;}
   .stagger-text .line2{font-size:22px;}
   .line-middle{font-size:19px;}
@@ -141,8 +171,16 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 </head>
 <body>
 <div class="wrap">
-<!-- 开场文字：●序章，白色楷体 -->
-<div class="opening-title">●序章</div>
+
+<!-- 开场页：白色● + 红色序章 + Allothiri + 死无葬身之地 -->
+<div class="opening-wrap">
+  <div class="opening-title">
+    <span class="opening-dot">●</span>
+    <span class="opening-text">序章</span>
+  </div>
+  <p class="opening-en">Allothiri</p>
+  <p class="opening-note">死无葬身之地</p>
+</div>
 
 <!-- 00 序章 -->
 <div class="page active" id="page0">
@@ -151,13 +189,12 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   </div>
 
   <div class="page0-content">
-    <!-- 两行错开叠放，不要横线 -->
     <div class="stagger-text">
-      <p class="line1">一本书读第二次会有新感悟</p>
-      <p class="line2">但不会有新结局</p>
+      <p class="line1">人类无法飞翔是因为心太重吗</p>
+      <p class="line2">回忆 情感 羁绊</p>
     </div>
 
-    <p class="line-middle">何可言 何能言 何处言</p>
+    <p class="line-middle">铸成枷锁</p>
 
     <div class="page-nav">
       <button onclick="goPage(0)">序章</button>
