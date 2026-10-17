@@ -36,7 +36,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   pointer-events:auto;
 }
 
-/* ========== 序章页GIF：靠左，垂直居中 ========== */
+/* ========== 序章页GIF：竖图GIF，靠左垂直居中 ========== */
 #page0{
   background-image:url("ezgif-115dd172c4a0c2a2.gif");
   background-size:auto 100%;
@@ -105,6 +105,19 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 /* ========== 序章页面文案 ========== */
 .page0-content{text-align:center;}
 .page0-content .main-line{font-size:28px;margin-bottom:12px;opacity:0.9;letter-spacing:2px;}
+
+/* ========== 手机端适配（竖屏GIF兼容方案） ========== */
+@media (max-width:768px){
+  .page{padding:20px;}
+  /* 手机：竖GIF依旧保持高度100%靠左，不会拉伸变形 */
+  #page0{
+    background-size:auto 100%;
+    background-position:left center;
+  }
+  .page0-content .main-line{font-size:22px;}
+  .top-nav button{padding:5px 10px;font-size:12px;}
+  .footer-signature{font-size:10px;}
+}
 </style>
 </head>
 <body>
