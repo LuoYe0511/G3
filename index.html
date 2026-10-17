@@ -49,27 +49,22 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   display:block;
 }
 
-/* 中间文字 */
+/* 中间文字区域 */
 .page0-content{
   position:relative;
   z-index:2;
   text-align:center;
 }
-.page0-content .main-line{font-size:28px;margin-bottom:12px;opacity:0.9;letter-spacing:2px;}
+.page0-content .line1{font-size:28px;margin-bottom:16px;opacity:0.9;letter-spacing:2px;}
+.page0-content .line2{font-size:24px;margin-bottom:32px;opacity:0.8;letter-spacing:2px;}
 
-/* 右上角导航栏 【序章 人物 须知 情节】 */
-.top-nav{
-  position:fixed;
-  top:22px;
-  right:24px;
-  z-index:99;
+/* 导航按钮，放到文字下方 */
+.page-nav{
   display:flex;
   gap:6px;
-  background:rgba(255,255,255,0.08);
-  padding:5px;
-  border-radius:999px;
+  justify-content:center;
 }
-.top-nav button{
+.page-nav button{
   background:transparent;
   border:none;
   padding:7px 16px;
@@ -78,7 +73,7 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
   font-size:14px;
   opacity:0.75;
 }
-.top-nav button.active{
+.page-nav button.active{
   background:rgba(255,255,255,0.18);
   opacity:1;
 }
@@ -117,21 +112,15 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
 /* ========== 手机端适配 ========== */
 @media (max-width:768px){
   .page{padding:20px;}
-  .page0-content .main-line{font-size:22px;}
-  .top-nav button{padding:5px 10px;font-size:12px;}
+  .page0-content .line1{font-size:22px;}
+  .page0-content .line2{font-size:19px;}
+  .page-nav button{padding:5px 10px;font-size:12px;}
   .footer-signature{font-size:10px;}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
-<!-- 右上角导航顺序：序章 人物 须知 情节 -->
-<div class="top-nav">
-<button onclick="goPage(0)">序章</button>
-<button onclick="goPage(1)">人物</button>
-<button onclick="goPage(2)">须知</button>
-<button onclick="goPage(3)">情节</button>
-</div>
 
 <!-- 00 序章，默认active打开直接显示 -->
 <div class="page active" id="page0">
@@ -140,14 +129,22 @@ html,body{height:100%;overflow:hidden;background:#0b0b0b;}
     <img src="ezgif-115dd172c4a0c2a2.gif" alt="动画">
   </div>
   <div class="page0-content">
-    <p class="main-line">缓缓飘落的枫叶像思念</p>
+    <p class="line1">一本书读第二次会有新感悟 但不会有新结局</p>
+    <p class="line2">何可言 何能言 何处言</p>
+    <!-- 导航按钮移到文案下方：序章 人物 须知 情节 -->
+    <div class="page-nav">
+      <button onclick="goPage(0)">序章</button>
+      <button onclick="goPage(1)">人物</button>
+      <button onclick="goPage(2)">须知</button>
+      <button onclick="goPage(3)">情节</button>
+    </div>
   </div>
 </div>
 
 <!-- JS页面切换 -->
 <script>
 const pages = document.querySelectorAll('.page');
-const navBtns = document.querySelectorAll('.top-nav button');
+const navBtns = document.querySelectorAll('.page-nav button');
 function goPage(index){
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
