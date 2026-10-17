@@ -85,7 +85,7 @@ html,body{
   z-index:210;
 }
 
-/* ========== 原来的序章页面 ========== */
+/* ========== 序章页面 默认隐藏，active才显示 ========== */
 .page{
   width:100%;
   height:100vh;
@@ -104,7 +104,7 @@ html,body{
   pointer-events:auto;
 }
 
-/* ========== 开场序章动画（你原来的序章标题） ========== */
+/* ========== 序章开场动画（全屏遮罩，2.8秒后消失） ========== */
 .opening-wrap{
   position:absolute;
   z-index:100;
@@ -154,7 +154,7 @@ html,body{
   letter-spacing:2px;
 }
 
-/* ========== 背景图：70vh ========== */
+/* ========== 序章背景图 70vh高度 ========== */
 .bg-img{
   position:absolute;
   top:0;
@@ -166,7 +166,7 @@ html,body{
   z-index:1;
 }
 
-/* ========== 图片内文字容器 ========== */
+/* ========== 图片上文字层 ========== */
 .img-text-wrap{
   position:absolute;
   top:0;
@@ -176,7 +176,6 @@ html,body{
   z-index:2;
 }
 
-/* 顶部标题【稳定居中】 */
 .line-top{
   position:absolute;
   top:8%;
@@ -189,7 +188,6 @@ html,body{
   animation-delay: 0.4s;
 }
 
-/* 回忆：22%高度，左6% */
 .txt-memory{
   position:absolute;
   top:22%;
@@ -201,7 +199,6 @@ html,body{
   animation-delay:1.4s;
 }
 
-/* 情感：40%高度，右6% */
 .txt-emotion{
   position:absolute;
   top:40%;
@@ -213,7 +210,6 @@ html,body{
   animation-delay:2.4s;
 }
 
-/* 羁绊：58%高度，左6% */
 .txt-bond{
   position:absolute;
   top:58%;
@@ -225,7 +221,6 @@ html,body{
   animation-delay:3.4s;
 }
 
-/* 铸成枷锁【稳定居中】 */
 .txt-lock{
   position:absolute;
   top:76%;
@@ -238,7 +233,7 @@ html,body{
   animation-delay:4.4s;
 }
 
-/* ========== 下方黑色区域：30% ========== */
+/* ========== 底部黑色区域30vh ========== */
 .bottom-area{
   position:absolute;
   top:70vh;
@@ -258,16 +253,15 @@ html,body{
   opacity:0.9;
 }
 
-/* ========== 底部导航栏【横向长椭圆形白色外框】 ========== */
+/* ========== 底部导航【横向长椭圆白边框】 ========== */
 .page-nav{
   position:absolute;
   bottom:24px;
   left:50%;
   transform:translateX(-50%);
   z-index:3;
-
   border:1px solid #ffffff;
-  border-radius:9999px; /* 超大圆角 = 长椭圆 */
+  border-radius:9999px;
   padding:12px 24px;
   display:flex;
   gap:16px;
@@ -291,7 +285,6 @@ html,body{
   background:rgba(255,255,255,0.22);
 }
 
-/* ========== 文字上浮动画 ========== */
 @keyframes fadeInUp{
   from{
     opacity:0;
@@ -389,8 +382,8 @@ html,body{
       <p class="opening-note">死无葬身之地</p>
     </div>
 
-    <!-- 这里是序章背景图，请确认文件名和实际图片一致！ -->
-    <img src="IMG_7221.JPG" class="bg-img" alt="背景图">
+    <!-- ✅ 已修正：IMG_7221.PNG -->
+    <img src="IMG_7221.PNG" class="bg-img" alt="背景图">
 
     <div class="img-text-wrap">
       <p class="line-top">人类无法飞翔是因为心太重吗</p>
