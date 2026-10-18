@@ -64,15 +64,13 @@ html,body{
   background:#0b0b0b;
   opacity:0;
   pointer-events:none;
-  transition: opacity 0.7s ease;
-  transform: translateZ(0);
 }
 .page.active{
   opacity:1;
   pointer-events:auto;
 }
 
-/* ========== 序章开场遮罩 总时长4秒 ========== */
+/* ========== 序章开场遮罩 【默认不播放动画】JS控制启动 ========== */
 .opening-wrap{
   position:absolute;
   z-index:100;
@@ -83,6 +81,9 @@ html,body{
   align-items:center;
   justify-content:center;
   background:#0b0b0b;
+}
+/* 动画单独定义，JS添加class才执行 */
+.opening-wrap.play-anim{
   animation: fadeOutOpening 4s ease-in forwards;
 }
 
@@ -90,6 +91,8 @@ html,body{
   display:flex;
   align-items:baseline;
   justify-content:center;
+}
+.opening-title.play-anim{
   animation: titleShow 4s ease forwards;
 }
 .opening-dot{
@@ -150,7 +153,7 @@ html,body{
   z-index:2;
 }
 
-/* 全部延迟4秒，等序章开场动画结束才开始淡入 */
+/* 文字：初始透明，JS统一启动动画，不再写死delay */
 .line-top{
   position:absolute;
   top:8%;
@@ -159,10 +162,7 @@ html,body{
   font-size:23px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: 4s;
 }
-
 .txt-memory{
   position:absolute;
   top:22%;
@@ -170,10 +170,7 @@ html,body{
   font-size:21px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay:5s;
 }
-
 .txt-emotion{
   position:absolute;
   top:40%;
@@ -181,10 +178,7 @@ html,body{
   font-size:21px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay:6s;
 }
-
 .txt-bond{
   position:absolute;
   top:58%;
@@ -192,10 +186,7 @@ html,body{
   font-size:21px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay:7s;
 }
-
 .txt-lock{
   position:absolute;
   top:76%;
@@ -204,8 +195,6 @@ html,body{
   font-size:21px;
   text-shadow: 0 2px 10px #000;
   opacity:0;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay:8s;
 }
 
 /* ========== 底部黑色区域30vh ========== */
@@ -226,8 +215,6 @@ html,body{
   z-index:2;
   font-size:21px;
   opacity:0;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay:9s;
 }
 
 /* ========== 底部导航【横向长椭圆白边框】 ========== */
@@ -345,9 +332,9 @@ html,body{
 
   <!-- 序章主页面 -->
   <div class="page" id="mainPage">
-    <div class="opening-wrap">
+    <div class="opening-wrap" id="openingAnim">
       <!-- 序章标题组 -->
-      <div class="opening-title">
+      <div class="opening-title" id="titleAnim">
         <span class="opening-dot">●</span>
         <span class="opening-text">序章</span>
       </div>
@@ -380,12 +367,44 @@ html,body{
 </div>
 
 <script>
-// 封面点击进入序章
-document.getElementById('coverPage').addEventListener('click', function(){
+// 获取元素
+const coverPage = document.getElementById('coverPage');
+const mainPage = document.getElementById('mainPage');
+const openingAnim = document.getElementById('openingAnim');
+const titleAnim = document.getElementById('titleAnim');
+
+// 所有需要淡入的文字
+const textList = [
+  document.querySelector('.line-top'),
+  document.querySelector('.txt-memory'),
+  document.querySelector('.txt-emotion'),
+  document.querySelector('.txt-bond'),
+  document.querySelector('.txt-lock'),
+  document.querySelector('.bottom-text')
+];
+const delayStep = 1000; // 文字逐个出现间隔1秒
+
+// 封面点击事件
+coverPage.addEventListener('click', function(){
   this.classList.add('fade-out');
+  // 封面淡出1秒后，显示主页面
   setTimeout(() => {
     this.style.display = 'none';
-    document.getElementById('mainPage').classList.add('active');
+    mainPage.classList.add('active');
+
+    // 启动开场●序章动画（4秒）
+    openingAnim.classList.add('play-anim');
+    titleAnim.classList.add('play-anim');
+
+    // 等开场4秒全部结束，再依次淡入文字
+    setTimeout(()=>{
+      textList.forEach((el, idx)=>{
+        setTimeout(()=>{
+          el.style.animation = "fadeInUp 1s ease forwards";
+        }, idx * delayStep);
+      })
+    },4000);
+
   }, 1000);
 });
 
