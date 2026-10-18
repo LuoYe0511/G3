@@ -2,14 +2,251 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>测试页面</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+<title>寂生 - Allothiri</title>
 <style>
-*{margin:0;padding:0;color:#fff;font-family:"KaiTi","楷体",STKaiti,serif;}
-body{background:#000;height:100vh;display:flex;align-items:center;justify-content:center;font-size:32px;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  color:#fff;
+  font-family:"KaiTi","楷体",STKaiti,serif;
+  -webkit-tap-highlight-color:transparent;
+}
+html,body{
+  height:100%;
+  overflow:hidden;
+  background:#000;
+}
+.wrap{
+  width:100%;
+  height:100%;
+  position:relative;
+}
+
+/* 封面页 */
+.cover-wrap{
+  position:absolute;
+  z-index:200;
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: opacity 1s ease;
+}
+.cover-wrap.fade-out{
+  opacity:0;
+  pointer-events:none;
+}
+.cover-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* 页面容器 */
+.page{
+  width:100%;
+  height:100vh;
+  height:100dvh;
+  position:absolute;
+  top:0;
+  left:0;
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 0.7s ease;
+}
+.page.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* 开场 ●序章 动画 */
+.opening-wrap{
+  position:absolute;
+  z-index:100;
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+}
+.opening-wrap.run{
+  animation: titleShow 6s ease forwards;
+}
+.opening-title{
+  font-size:72px;
+  letter-spacing:12px;
+}
+@keyframes titleShow{
+  0%{opacity:0;}
+  15%{opacity:1;}
+  80%{opacity:1;}
+  100%{opacity:0;pointer-events:none;}
+}
+
+/* 序章背景gif */
+.bg-gif{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  background-image:url("ezgif-115dd172c4a0c2a2.gif");
+  background-size:cover;
+  background-position:center;
+}
+.text-layer{
+  position:absolute;
+  z-index:2;
+  width:100%;
+  height:100%;
+  padding:12vh 40px;
+}
+/* 错开排版文案 */
+.p1{
+  text-align:center;
+  font-size:24px;
+  text-shadow:0 0 8px #000;
+  margin-bottom:12px;
+}
+.p2{
+  text-align:right;
+  font-size:24px;
+  text-shadow:0 0 8px #000;
+  margin-bottom:24px;
+  padding-right:12%;
+}
+.p3{
+  text-align:center;
+  font-size:24px;
+  text-shadow:0 0 8px #000;
+  margin-bottom:30px;
+  padding-left:12%;
+}
+.line{
+  width:100%;
+  text-align:center;
+  font-size:26px;
+  font-weight:bold;
+  margin-bottom:30px;
+}
+/* 导航按钮 方框包裹 */
+.nav-box{
+  display:flex;
+  gap:24px;
+  justify-content:center;
+}
+.nav-box button{
+  background:transparent;
+  border:1px solid #fff;
+  padding:6px 14px;
+  font-size:20px;
+  cursor:pointer;
+}
+.nav-box button:hover{
+  background:rgba(255,255,255,0.15);
+}
+
+/* 网易云播放器位置：右下角 */
+.music-player{
+  position:absolute;
+  bottom:20px;
+  right:10px;
+  z-index:999;
+}
+
+/* 须知页面样式 */
+.notice-wrap{
+  padding:60px 30px;
+  font-size:20px;
+  line-height:2;
+}
 </style>
 </head>
 <body>
-测试页面成功打开
+<div class="wrap">
+  <!-- 封面 -->
+  <div class="cover-wrap" id="cover">
+    <img class="cover-img" src="IMG_7221.PNG" alt="封面">
+  </div>
+
+  <!-- 序章页面 -->
+  <div class="page" id="page1">
+    <div class="bg-gif"></div>
+    <div class="opening-wrap" id="opening">
+      <div class="opening-title">●序章</div>
+    </div>
+    <div class="text-layer">
+      <p class="p1">一本书读第二次会有新感悟</p>
+      <p class="p2">但不会有新结局</p>
+      <p class="p3">何可言 何能言 何处言</p>
+      <div class="line">——————————</div>
+      <div class="nav-box">
+        <button onclick="switchPage('page1')">序章</button>
+        <button onclick="switchPage('page2')">人物</button>
+        <button onclick="switchPage('page3')">须知</button>
+        <button onclick="switchPage('page4')">情节</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 人物页 -->
+  <div class="page" id="page2">
+    <div style="padding:60px 30px;font-size:22px;">人物页面内容</div>
+  </div>
+
+  <!-- 须知页 -->
+  <div class="page" id="page3">
+    <div class="notice-wrap">
+      男陪婉拒le 点单默认姐姐们送单<br>
+      提前先说明喜/雷 未告知踩到暗雷概不负责<br>
+      婉拒黄/黑脸emoji<br>
+      包括但玩烂梗以及摆烂话术 如发生大退并视为送单<br>
+      30min/5min 60min/10min决定去留 婉拒卡点<br>
+      婉拒过度提起“板陪关系”出现则大退视为送单<br>
+      单中出现不适请及时说出安全词“慢一点 寂生 ”<br>
+      虐单风格中低恋 婉拒无恋 高恋慎点<br>
+      接受我的邀约 请给一些时间等待我与你共鸣
+    </div>
+  </div>
+
+  <!-- 情节页 -->
+  <div class="page" id="page4">
+    <div style="padding:60px 30px;font-size:22px;">情节页面内容</div>
+  </div>
+
+  <!-- 网易云音乐播放器 iframe -->
+  <div class="music-player">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="https://music.163.com/outchain/player?type=2&id=2757694450&auto=0&height=66"></iframe>
+  </div>
+</div>
+
+<script>
+const cover = document.getElementById('cover');
+const page1 = document.getElementById('page1');
+const opening = document.getElementById('opening');
+
+// 点击封面：消失 + 启动序章开场动画
+cover.onclick = function(){
+  cover.classList.add('fade-out');
+  page1.classList.add('active');
+  opening.classList.add('run');
+}
+
+// 页面切换
+function switchPage(targetId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(targetId).classList.add('active');
+}
+</script>
 </body>
 </html>
