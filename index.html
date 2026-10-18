@@ -26,6 +26,17 @@ html,body{
   position:relative;
 }
 
+/* ========== Lightfall流光画布：背景图上方、文字下方 ========== */
+#lightfallCanvas{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:70vh;
+  z-index:1;
+  pointer-events:none;
+}
+
 /* ========== 首页封面 ========== */
 .cover-wrap{
   position:absolute;
@@ -159,7 +170,7 @@ html,body{
   100%{opacity:0;pointer-events:none;}
 }
 
-/* ========== 序章背景图 CSS背景 ========== */
+/* ========== 序章背景图 CSS背景（保留原图） ========== */
 .bg-img{
   position:absolute;
   top:0;
@@ -169,7 +180,7 @@ html,body{
   background-image:url("IMG_7221.PNG");
   background-size:cover;
   background-position:center top;
-  z-index:1;
+  z-index:0;
 }
 
 /* ========== 图片上文字层 ========== */
@@ -307,6 +318,9 @@ html,body{
 
 /* ========== 手机端适配 ========== */
 @media (max-width:768px){
+  #lightfallCanvas{
+    height:68vh;
+  }
   .opening-dot{font-size:44px;}
   .opening-text{font-size:48px;}
   .opening-en{font-size:24px;letter-spacing:-0.5px;}
@@ -393,6 +407,8 @@ html,body{
     </div>
 
     <div class="bg-img"></div>
+    <!-- 流光层，叠加在背景图上 -->
+    <canvas id="lightfallCanvas"></canvas>
 
     <div class="img-text-wrap">
       <p class="line-top">人类无法飞翔是因为心太重吗</p>
@@ -434,5 +450,111 @@ function goPage(index){
 }
 </script>
 
+<!-- Lightfall WebGL流光脚本 -->
+<script>
+(function () {
+  const canvas = document.getElementById('lightfallCanvas');
+  if (!canvas) return;
+
+  const gl = canvas.getContext('webgl');
+  if (!gl) return;
+
+  function compile(type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    return shader;
+  }
+
+  const vertexSource = `
+    attribute vec2 a_pos;
+    void main() {
+      gl_Position = vec4(a_pos, 0.0, 1.0);
+    }
+  `;
+
+  const fragmentSource = `
+    precision highp float;
+    uniform float u_time;
+    uniform vec2 u_res;
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_res;
+      vec2 p = uv * 10.0;
+
+      vec3 color = vec3(0.0);
+
+      for (float i = 1.0; i <= 8.0; i++) {
+        vec2 id = floor(p / i);
+        float r = hash(id);
+
+        float y = p.y + u_time * 0.18 + r * 6.2831;
+        float cycle = mod(y, 1.0);
+
+        float head = smoothstep(0.92, 1.0, cycle);
+        float trail = exp(-12.0 * cycle);
+
+        float alpha = head + trail * 0.55;
+
+        vec3 streakColor = mix(
+          vec3(0.55, 0.75, 1.0),
+          vec3(0.95, 0.6, 1.0),
+          r
+        );
+
+        color += streakColor * alpha * 0.22;
+      }
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `;
+
+  const vsh = compile(gl.VERTEX_SHADER, vertexSource);
+  const fsh = compile(gl.FRAGMENT_SHADER, fragmentSource);
+
+  const program = gl.createProgram();
+  gl.attachShader(program, vsh);
+  gl.attachShader(program, fsh);
+  gl.linkProgram(program);
+  gl.useProgram(program);
+
+  const buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    -1, -1,  1, -1, -1,  1,
+    -1,  1,  1, -1,  1,  1
+  ]), gl.STATIC_DRAW);
+
+  const aPos = gl.getAttribLocation(program, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  const uTime = gl.getUniformLocation(program, 'u_time');
+  const uRes = gl.getUniformLocation(program, 'u_res');
+
+  let raf;
+  function resize(){
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    gl.viewport(0,0,canvas.width,canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function render(timestamp){
+    gl.uniform1f(uTime, timestamp * 0.001);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.drawArrays(gl.TRIANGLES,0,6);
+    raf = requestAnimationFrame(render);
+  }
+  raf = requestAnimationFrame(render);
+
+  window.addEventListener('beforeunload', ()=> cancelAnimationFrame(raf));
+})();
+</script>
 </body>
 </html>
