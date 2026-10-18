@@ -1,3 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+<title>寂生 - Allothiri</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  color:#fff;
+  font-family:"KaiTi","楷体",STKaiti,serif;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  height:100%;
+  overflow:hidden;
+  background:#0b0b0b;
+}
+
+.wrap{
+  width:100%;
+  height:100%;
+  position:relative;
+}
+
+/* ========== 首页封面 ========== */
+.cover-wrap{
+  position:absolute;
+  z-index:200;
+  width:100%;
+  height:100%;
+  background:#0b0b0b;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: opacity 1s ease;
+}
+.cover-wrap.fade-out{
+  opacity:0;
+  pointer-events:none;
+}
+.cover-inner{
+  position:relative;
+  max-width:70%;
+  max-height:70vh;
+}
+.cover-img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+.cover-note{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  text-align:right;
+  line-height:1.6;
+}
+.cover-cn{
+  display:block;
+  color:#ffffff;
+  font-size:20px;
+  text-shadow: 0 2px 8px #000;
+}
+.cover-en{
+  display:block;
+  color:#ff2b2b;
+  font-size:16px;
+  font-family: sans-serif;
+  text-shadow: 0 2px 8px #000;
+}
+.tip-text{
+  position:absolute;
+  bottom:80px;
+  width:100%;
+  text-align:center;
+  font-size:16px;
+  color:#fff;
+  opacity:0.6;
+  z-index:210;
+}
+
+/* ========== 序章页面 默认隐藏 ========== */
+.page{
+  width:100%;
+  height:100vh;
+  height:100dvh;
+  position:absolute;
+  top:0;
+  left:0;
+  background:#0b0b0b;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 0.7s ease;
+  transform: translateZ(0);
+}
+.page.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ========== 序章开场遮罩 总时长4秒 ========== */
+.opening-wrap{
+  position:absolute;
+  z-index:100;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:#0b0b0b;
+  animation: fadeOutOpening 4s ease-in forwards;
+}
+
+.opening-title{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  animation: titleShow 4s ease forwards;
+}
+.opening-dot{
+  color:#ffffff;
+  font-size:64px;
+  margin-right:12px;
+}
+.opening-text{
+  color:#ffffff;
+  font-size:72px;
+  letter-spacing:12px;
+}
+.opening-en{
+  color:#ffffff;
+  font-family: sans-serif;
+  font-size:32px;
+  margin-top:18px;
+  letter-spacing:-1px;
+}
+.opening-note{
+  color:#ffffff;
+  font-size:16px;
+  margin-top:10px;
+}
+
+@keyframes titleShow{
+  0%{opacity:0;}
+  15%{opacity:1;}
+  85%{opacity:1;}
+  100%{opacity:0;}
+}
+@keyframes fadeOutOpening {
+  0%{opacity:1;}
+  85%{opacity:1;}
+  100%{opacity:0;pointer-events:none;}
+}
+
+/* ========== 序章背景图 CSS背景 ========== */
+.bg-img{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:70vh;
+  background-image:url("IMG_7221.PNG");
+  background-size:cover;
+  background-position:center top;
+  z-index:1;
+}
+
+/* ========== 图片上文字层 ========== */
+.img-text-wrap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:70vh;
+  z-index:2;
+}
+
+/* 全部延迟4秒，等序章开场动画结束才开始淡入 */
+.line-top{
+  position:absolute;
+  top:8%;
+  width:100%;
+  text-align:center;
+  font-size:23px;
+  text-shadow: 0 2px 10px #000;
+  opacity:0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 4s;
+}
+
+.txt-memory{
+  position:absolute;
+  top:22%;
+  left:6%;
+  font-size:21px;
+  text-shadow: 0 2px 10px #000;
+  opacity:0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay:5s;
+}
+
+.txt-emotion{
+  position:absolute;
+  top:40%;
+  right:6%;
+  font-size:21px;
+  text-shadow: 0 2px 10px #000;
+  opacity:0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay:6s;
+}
+
+.txt-bond{
+  position:absolute;
+  top:58%;
+  left:6%;
+  font-size:21px;
+  text-shadow: 0 2px 10px #000;
+  opacity:0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay:7s;
+}
+
+.txt-lock{
+  position:absolute;
+  top:76%;
+  width:100%;
+  text-align:center;
+  font-size:21px;
+  text-shadow: 0 2px 10px #000;
+  opacity:0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay:8s;
+}
+
 /* ========== 底部黑色区域30vh ========== */
 .bottom-area{
   position:absolute;
