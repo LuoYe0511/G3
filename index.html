@@ -104,7 +104,7 @@ html,body{
   pointer-events:auto;
 }
 
-/* ========== 序章开场遮罩 总时长13秒 ========== */
+/* ========== 序章开场遮罩 总时长4秒 ========== */
 .opening-wrap{
   position:absolute;
   z-index:100;
@@ -115,32 +115,14 @@ html,body{
   align-items:center;
   justify-content:center;
   background:#0b0b0b;
-  animation: fadeOutOpening 13s ease-in forwards;
+  animation: fadeOutOpening 4s ease-in forwards;
 }
 
-/* 深渊文字：中文白色，英文红色，总动画5秒 */
-.abyss-text-cn{
-  color:#ffffff;
-  font-size:32px;
-  margin-bottom:12px;
-  animation: abyssFade 5s ease forwards;
-}
-.abyss-text-en{
-  color:#ff2b2b;
-  font-size:20px;
-  font-family:sans-serif;
-  margin-bottom:60px;
-  animation: abyssFade 5s ease forwards;
-}
-
-/* 序章标题组：延迟5秒出现，动画时长8秒 */
 .opening-title{
   display:flex;
   align-items:baseline;
   justify-content:center;
-  opacity:0;
-  animation: titleShow 8s ease forwards;
-  animation-delay:5s;
+  animation: titleShow 4s ease forwards;
 }
 .opening-dot{
   color:#ffffff;
@@ -158,36 +140,22 @@ html,body{
   font-size:32px;
   margin-top:18px;
   letter-spacing:-1px;
-  opacity:0;
-  animation: titleShow 8s ease forwards;
-  animation-delay:5s;
 }
 .opening-note{
   color:#ffffff;
   font-size:16px;
   margin-top:10px;
-  opacity:0;
-  animation: titleShow 8s ease forwards;
-  animation-delay:5s;
 }
 
-/* 深渊台词动画：淡入 -> 长时间停留 -> 末尾淡出 */
-@keyframes abyssFade{
-  0%{opacity:0;}
-  12%{opacity:1;}
-  88%{opacity:1;}
-  100%{opacity:0;}
-}
-/* 序章标题动画：淡入之后全程保持可见 */
 @keyframes titleShow{
   0%{opacity:0;}
-  12%{opacity:1;}
-  100%{opacity:1;}
+  15%{opacity:1;}
+  85%{opacity:1;}
+  100%{opacity:0;}
 }
-/* 黑色遮罩，直到13秒最后一刻才消失 */
 @keyframes fadeOutOpening {
   0%{opacity:1;}
-  92%{opacity:1;}
+  85%{opacity:1;}
   100%{opacity:0;pointer-events:none;}
 }
 
@@ -412,10 +380,6 @@ html,body{
   <!-- 序章主页面 -->
   <div class="page" id="mainPage">
     <div class="opening-wrap">
-      <!-- 深渊文字 -->
-      <p class="abyss-text-cn">当你凝视深渊的时候 深渊也在凝视你</p>
-      <p class="abyss-text-en">When you gaze into the abyss the abyss also gazes into you</p>
-
       <!-- 序章标题组 -->
       <div class="opening-title">
         <span class="opening-dot">●</span>
